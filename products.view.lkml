@@ -28,6 +28,7 @@ view: products {
     type: string
     sql:${TABLE}.brand ;;
     link: {
+      label: "brand"
       url: "?Brand={{value}}"
     }
   }

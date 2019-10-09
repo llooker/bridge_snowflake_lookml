@@ -11,7 +11,7 @@ explore: products {
 
   join: fulfillers {
     type: inner
-    sql_on: ${product_clicked.retailer_id} = ${fulfillers.id};;
+    sql_on: ${product_clicked.retailer_id} = ${fulfillers.short_name};; #retailer_id is not an int, would not match on fufiller.id WFD 10-7-2019
     relationship: many_to_one
   }
 
