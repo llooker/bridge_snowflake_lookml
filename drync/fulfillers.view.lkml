@@ -156,7 +156,7 @@ view: fulfillers {
 
   dimension: latitude {
     type: number
-    sql: ${TABLE}."LATITUDE" ;;
+    sql: ${TABLE}.latitude ;;
   }
 
   dimension: location_type {
@@ -191,7 +191,7 @@ view: fulfillers {
 
   dimension: longitude {
     type: number
-    sql: ${TABLE}."LONGITUDE" ;;
+    sql: ${TABLE}.longitude ;;
   }
 
   dimension: loyalty_program_participant {
@@ -382,8 +382,8 @@ view: fulfillers {
 
   dimension: location {
     type: location
-    sql_latitude: ${TABLE}."latitude" ;;
-    sql_longitude: ${TABLE}."longitude" ;;
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
   }
 
   set: detail {

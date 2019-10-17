@@ -1,5 +1,5 @@
 view: organizations {
-  sql_table_name: select * from production.production.organizations limit 10;;
+  sql_table_name: production.production.organizations;;
 
   dimension: id {
     primary_key: yes #https://dryncapp.looker.com/sql/qhbyy3ysgvznmq

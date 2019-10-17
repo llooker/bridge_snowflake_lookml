@@ -37,9 +37,19 @@ view: product_clicked {
     sql: ${TABLE}.context_traits_fulfiller_id ;;
   }
 
-  dimension: timestamp {
+  dimension_group: event {
     description: "Time of the event"
-    type: date_time
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      year,
+      time_of_day,
+      day_of_week
+    ]
     sql:  ${TABLE}.timestamp ;;
   }
 
@@ -52,7 +62,49 @@ view: product_clicked {
   dimension: price {
     description: "Price shown to the user"
     type:  number
-    sql:  ${TABLE}.price ;;
+    sql:  REPLACE(${TABLE}.price, ',')::float;;
+    value_format_name: usd
+  }
+
+  dimension: price_per_ounce {
+    type: number
+    sql: ${price}/${products.size_oz} ;;
+    value_format_name: usd
+  }
+
+  dimension: price_range {
+    type: tier
+    tiers: [
+      15, 20, 30, 50, 100
+    ]
+    style: relational
+    sql: ${price} ;;
+    value_format_name: usd
+  }
+
+  dimension: price_tier {
+    type:  string
+    case: {
+      when: {
+        label: "Luxury"
+        sql: (${products.category} = 'Wine' AND ${price} >= 50)
+        OR (${products.category} in ('Beer', 'Other') AND ${price} >= 20)
+        OR (${products.category} = 'Spirit' AND ${price} >= 100);;
+      }
+      when: {
+        label: "Mid Range"
+        sql: (${products.category} = 'Wine' AND ${price} >= 20 AND ${price} < 50)
+                  OR (${products.category} in ('Beer', 'Other') AND ${price} >= 10 AND ${price} < 20)
+                  OR (${products.category} = 'Spirit' AND ${price} >= 50 and ${price} < 100);;
+      }
+      when: {
+        label: "Value"
+        sql: (${products.category} = 'Wine' AND ${price} < 20)
+                  OR (${products.category} in ('Beer', 'Other') AND ${price} < 10)
+                  OR (${products.category} = 'Spirit' AND ${price} < 50);;
+      }
+      else: "Undefined"
+    }
   }
 
   dimension_group: occurrence {
@@ -75,5 +127,6 @@ view: product_clicked {
 
   measure: count {
     type: count
+    drill_fields: [products.brand, products.name, products.category, products.subcategory, price, price_tier, id, price_range]
   }
 }

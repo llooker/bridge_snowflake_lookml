@@ -43,6 +43,21 @@ view: products {
     sql: ${TABLE}.quantity::string || ' ' || ${TABLE}.size || ' ' || ${TABLE}.type ;;
   }
 
+  dimension: size {
+    type: string
+    sql:  ${TABLE}.size ;;
+  }
+
+  dimension: size_oz {
+    type: number
+    sql: CASE
+    WHEN regexp_instr(size, '(oz|o)') > 0 THEN CAST(REGEXP_REPLACE(size, '(oz|o)') AS FLOAT)
+    WHEN CHARINDEX('ml', size) > 0 THEN CAST(REPLACE(size, 'ml') AS FLOAT)/29.574
+    WHEN CHARINDEX('gal', size) > 0 THEN CAST(REPLACE(size, 'gal') AS FLOAT) * 128
+    WHEN regexp_instr(size, '(l|L|liter)') > 0 THEN CAST(REGEXP_REPLACE(size, '(l|L|liter)') AS FLOAT) * 33.814
+    ELSE 1 END;;
+  }
+
   dimension: category {
     type:  string
     sql:
