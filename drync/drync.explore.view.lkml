@@ -1,17 +1,17 @@
-connection: "warehouse2"
-
 include: "*.view.lkml"
 
-explore: product_clicked {
+explore: product_clicked_drync {
+  from:  product_clicked
+  group_label: "Drync"
   join: products {
     type: inner
     relationship: many_to_one
-    sql_on: ${product_clicked.product_id} = ${products.id} ;;
+    sql_on: ${product_clicked_drync.product_id} = ${products.id} ;;
   }
 
   join: fulfillers {
     type: inner
-    sql_on: ${product_clicked.retailer_id} = ${fulfillers.short_name};; #retailer_id is not an int, would not match on fufiller.id WFD 10-7-2019
+    sql_on: ${product_clicked_drync.retailer_id} = ${fulfillers.short_name};; #retailer_id is not an int, would not match on fufiller.id WFD 10-7-2019
     relationship: many_to_one
   }
 
@@ -21,23 +21,24 @@ explore: product_clicked {
     relationship: many_to_one
   }
 
-  join: users {
+  join: users_drync {
     type: inner
-    sql_on: ${product_clicked.user_id} = ${users.id} ;;
+    sql_on: ${product_clicked_drync.user_id} = ${users_drync.id} ;;
     relationship: many_to_one
   }
 
   join: orders {
     type: inner
-    sql_on: ${users.id} = ${orders.user_id} ;;
+    sql_on: ${users_drync.id} = ${orders.user_id} ;;
     relationship: one_to_many
   }
 }
 
-explore: users {
+explore: users_drync {
+  group_label: "Drync"
   join: orders {
     type: left_outer
-    sql_on: ${users.id} = ${orders.user_id} ;;
+    sql_on: ${users_drync.id} = ${orders.user_id} ;;
     relationship: one_to_many
   }
 
@@ -49,7 +50,7 @@ explore: users {
 
   join: product_clicked {
     type: inner
-    sql_on: ${product_clicked.user_id} = ${users.id} ;;
+    sql_on: ${product_clicked.user_id} = ${users_drync.id} ;;
     relationship: many_to_one
   }
 
@@ -61,6 +62,7 @@ explore: users {
 }
 
 
-explore: orders {
-
+explore: orders_drync {
+  from:  orders
+  group_label: "Drync"
 }

@@ -1,4 +1,4 @@
-view: users {
+view: users_drync {
   sql_table_name: production.production.users ;;
 
   dimension: id {
@@ -32,6 +32,21 @@ view: users {
     sql: extract(year from current_date) - ${birth_year} ;;
   }
 
+  dimension: gender {
+    type: string
+    case: {
+      when: {
+        label: "Male"
+        sql: ${TABLE}.gender = 'm' ;;
+      }
+      when: {
+        label: "Female"
+        sql: ${TABLE}.gender = 'f' ;;
+      }
+      else: "N/A"
+    }
+  }
+
   dimension: generation {
     type:  string
     case: {
@@ -60,4 +75,9 @@ view: users {
     drill_fields: [email, last_name, birth_year, age, generation, products.brand, products.name, products.category, products.subcategory]
   }
 
+  measure: percentage {
+    type: percent_of_total
+    sql: ${count} ;;
+    drill_fields: [email, last_name, birth_year, age, generation, products.brand, products.name, products.category, products.subcategory]
+  }
 }

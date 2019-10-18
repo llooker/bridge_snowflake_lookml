@@ -23,6 +23,34 @@ view: tipsi_auth_user {
     sql: ${TABLE}."BIRTH_DATE" ;;
   }
 
+  dimension: age {
+    type: number
+    sql: extract(year from current_date) - ${birth_year} ;;
+  }
+
+  dimension: generation {
+    type:  string
+    case: {
+      when: {
+        label: "Mature"
+        sql: ${birth_year} < 1946;;
+      }
+      when: {
+        label: "Baby Boomer"
+        sql: ${birth_year} >= 1946 AND ${birth_year} <= 1964;;
+      }
+      when: {
+        label: "Generation X"
+        sql: ${birth_year} > 1964 AND ${birth_year} <= 1980;;
+      }
+      when: {
+        label: "Millennial"
+        sql: ${birth_year} > 1980 AND ${birth_year} <= 2000;;
+      }
+      else: "Undefined"
+    }
+  }
+
   dimension: data {
     type: string
     sql: ${TABLE}."DATA" ;;
@@ -113,6 +141,7 @@ view: tipsi_auth_user {
 
   measure: count {
     type: count
-    drill_fields: [id, username, first_name, last_name]
+    drill_fields: [id, username, first_name, last_name, password, group_id, generation, birth_date, last_login_date, is_active, token,
+      age, is_staff, data]
   }
 }

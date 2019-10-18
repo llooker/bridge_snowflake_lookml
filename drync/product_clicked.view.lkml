@@ -68,7 +68,7 @@ view: product_clicked {
 
   dimension: price_per_ounce {
     type: number
-    sql: ${price}/${products.size_oz} ;;
+    sql: ${price}/NULLIF(${products.size_oz},0) ;;
     value_format_name: usd
   }
 
