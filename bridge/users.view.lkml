@@ -10,6 +10,7 @@ view: users {
     sql:  SELECT * FROM ${users_drync_bridge.SQL_TABLE_NAME}
             UNION
           SELECT * FROM ${users_tipsi_bridge.SQL_TABLE_NAME}
+          --left join genderize
       ;;
   }
 
@@ -24,6 +25,8 @@ view: users {
   }
   dimension: source {
     type: string
-    sql:  'drync' ;;
+  }
+  dimension: gender {
+#     sql: coalesce(${TABLE}.gender,genderize.gender) ;;
   }
 }

@@ -1,5 +1,5 @@
 view: tipsi_auth_user_groups {
-  sql_table_name: PUBLIC.TIPSI_AUTH_USER_GROUPS ;;
+  sql_table_name: TIPSI.PUBLIC.TIPSI_AUTH_USER_GROUPS ;;
   drill_fields: [id]
 
   dimension: id {

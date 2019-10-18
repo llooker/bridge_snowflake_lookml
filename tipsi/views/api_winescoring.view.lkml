@@ -1,5 +1,5 @@
 view: api_winescoring {
-  sql_table_name: PUBLIC.API_WINESCORING ;;
+  sql_table_name: TIPSI.PUBLIC.API_WINESCORING ;;
   drill_fields: [id]
 
   dimension: id {

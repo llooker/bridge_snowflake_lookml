@@ -32,6 +32,11 @@ view: users_drync {
     sql: extract(year from current_date) - ${birth_year} ;;
   }
 
+  dimension: gender_for_ndt {
+    hidden: yes
+    sql: ${gender} ;;
+  }
+
   dimension: gender {
     type: string
     case: {

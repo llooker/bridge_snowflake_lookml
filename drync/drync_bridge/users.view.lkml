@@ -6,6 +6,11 @@ view: users_drync_bridge {
       column: first_name {}
       column: last_name {}
       column: birth_year {}
+      column: gender {field: users_drync.gender_for_ndt}
+      derived_column: source {
+        sql: 'drync' ;;
+      }
+
     }
   }
   dimension: id {
@@ -19,6 +24,6 @@ view: users_drync_bridge {
   }
   dimension: source {
     type: string
-    sql:  'drync' ;;
   }
+  dimension: gender {}
 }

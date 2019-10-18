@@ -1,5 +1,5 @@
 view: api_country {
-  sql_table_name: PUBLIC.API_COUNTRY ;;
+  sql_table_name: TIPSI.PUBLIC.API_COUNTRY ;;
   drill_fields: [id]
 
   dimension: id {

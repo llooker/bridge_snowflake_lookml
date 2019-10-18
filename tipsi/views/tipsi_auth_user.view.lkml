@@ -1,5 +1,5 @@
 view: tipsi_auth_user {
-  sql_table_name: PUBLIC.TIPSI_AUTH_USER ;;
+  sql_table_name: TIPSI.PUBLIC.TIPSI_AUTH_USER ;;
   drill_fields: [id]
 
   dimension: id {
@@ -21,6 +21,11 @@ view: tipsi_auth_user {
     convert_tz: no
     datatype: date
     sql: ${TABLE}."BIRTH_DATE" ;;
+  }
+
+  dimension: birth_year_number {
+    type: number
+    sql: ${birth_year::number} ;;
   }
 
   dimension: age {
@@ -137,6 +142,11 @@ view: tipsi_auth_user {
   dimension: username {
     type: string
     sql: ${TABLE}."USERNAME" ;;
+  }
+
+  dimension: gender {
+    type: string
+    sql: null ;;
   }
 
   measure: count {

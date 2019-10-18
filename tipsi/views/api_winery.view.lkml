@@ -1,5 +1,5 @@
 view: api_winery {
-  sql_table_name: PUBLIC.API_WINERY ;;
+  sql_table_name: TIPSI.PUBLIC.API_WINERY ;;
   drill_fields: [id]
 
   dimension: id {

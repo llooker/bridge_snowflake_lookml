@@ -1,5 +1,5 @@
 view: vendor_drink {
-  sql_table_name: PUBLIC.VENDOR_DRINK ;;
+  sql_table_name: TIPSI.PUBLIC.VENDOR_DRINK ;;
   drill_fields: [id]
 
   dimension: id {

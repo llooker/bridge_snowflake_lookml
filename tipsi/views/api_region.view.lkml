@@ -1,5 +1,5 @@
 view: api_region {
-  sql_table_name: PUBLIC.API_REGION ;;
+  sql_table_name: TIPSI.PUBLIC.API_REGION ;;
   drill_fields: [id]
 
   dimension: id {

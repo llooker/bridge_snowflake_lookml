@@ -1,5 +1,5 @@
 view: retail_retailinventory {
-  sql_table_name: PUBLIC.RETAIL_RETAILINVENTORY ;;
+  sql_table_name: TIPSI.PUBLIC.RETAIL_RETAILINVENTORY ;;
   drill_fields: [id]
 
   dimension: id {

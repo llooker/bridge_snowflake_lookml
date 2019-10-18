@@ -1,5 +1,5 @@
 view: retail_categoryitem {
-  sql_table_name: PUBLIC.RETAIL_CATEGORYITEM ;;
+  sql_table_name: TIPSI.PUBLIC.RETAIL_CATEGORYITEM ;;
   drill_fields: [id]
 
   dimension: id {

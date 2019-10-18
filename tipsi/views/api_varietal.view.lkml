@@ -1,5 +1,5 @@
 view: api_varietal {
-  sql_table_name: PUBLIC.API_VARIETAL ;;
+  sql_table_name: TIPSI.PUBLIC.API_VARIETAL ;;
   drill_fields: [id]
 
   dimension: id {

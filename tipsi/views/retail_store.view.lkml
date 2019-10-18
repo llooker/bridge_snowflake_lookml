@@ -1,5 +1,5 @@
 view: retail_store {
-  sql_table_name: PUBLIC.RETAIL_STORE ;;
+  sql_table_name: TIPSI.PUBLIC.RETAIL_STORE ;;
 
   dimension: delivery_zones {
     type: string

@@ -1,5 +1,5 @@
 view: api_winetbl {
-  sql_table_name: PUBLIC.API_WINETBL ;;
+  sql_table_name: TIPSI.PUBLIC.API_WINETBL ;;
   drill_fields: [id]
 
   dimension: id {

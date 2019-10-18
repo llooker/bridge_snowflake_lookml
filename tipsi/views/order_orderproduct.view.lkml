@@ -1,5 +1,5 @@
 view: order_orderproduct {
-  sql_table_name: PUBLIC.ORDER_ORDERPRODUCT ;;
+  sql_table_name: TIPSI.PUBLIC.ORDER_ORDERPRODUCT ;;
   drill_fields: [id]
 
   dimension: id {

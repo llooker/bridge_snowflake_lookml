@@ -5,7 +5,12 @@ view: users_tipsi_bridge {
       column: email {}
       column: first_name {}
       column: last_name {}
-      column: birth_year {}
+      column: birth_year { field: users_tipsi.birth_year_number }
+      derived_column: source {
+        sql: 'tipsi' ;;
+      }
+      column: gender {}
+
     }
   }
   dimension: id {
@@ -19,7 +24,6 @@ view: users_tipsi_bridge {
   }
   dimension: source {
     type: string
-    sql: 'tipsi' ;;
   }
-
+dimension: gender {}
 }
