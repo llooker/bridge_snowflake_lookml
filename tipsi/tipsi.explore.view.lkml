@@ -1,4 +1,5 @@
 include: "./views/*.view.lkml"
+include: "./derived_views/*.view.lkml"
 
 explore: products {
   from: retail_retailinventory
@@ -123,4 +124,8 @@ explore: orders {
     sql_on: ${order_orderproduct.wine_id} = ${api_winetbl.id} ;;
     relationship: many_to_one
   }
+}
+
+explore: products_tipsi {
+  group_label: "Tipsi"
 }
