@@ -1,4 +1,4 @@
-view: products {
+view: products_drync {
   derived_table: {
     sql: select b.id, w.id as product_id, w.name as name, p.quantity as quantity, p.size as size, p.type as type, s.style_type as category, s.name as style, br.name as brand
          from production.production.bottles b

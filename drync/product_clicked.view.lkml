@@ -68,7 +68,7 @@ view: product_clicked {
 
   dimension: price_per_ounce {
     type: number
-    sql: ${price}/NULLIF(${products.size_oz},0) ;;
+    sql: ${price}/NULLIF(${products_drync.size_oz},0) ;;
     value_format_name: usd
   }
 
@@ -87,21 +87,21 @@ view: product_clicked {
     case: {
       when: {
         label: "Luxury"
-        sql: (${products.category} = 'Wine' AND ${price} >= 50)
-        OR (${products.category} in ('Beer', 'Other') AND ${price} >= 20)
-        OR (${products.category} = 'Spirit' AND ${price} >= 100);;
+        sql: (${products_drync.category} = 'Wine' AND ${price} >= 50)
+        OR (${products_drync.category} in ('Beer', 'Other') AND ${price} >= 20)
+        OR (${products_drync.category} = 'Spirit' AND ${price} >= 100);;
       }
       when: {
         label: "Mid Range"
-        sql: (${products.category} = 'Wine' AND ${price} >= 20 AND ${price} < 50)
-                  OR (${products.category} in ('Beer', 'Other') AND ${price} >= 10 AND ${price} < 20)
-                  OR (${products.category} = 'Spirit' AND ${price} >= 50 and ${price} < 100);;
+        sql: (${products_drync.category} = 'Wine' AND ${price} >= 20 AND ${price} < 50)
+                  OR (${products_drync.category} in ('Beer', 'Other') AND ${price} >= 10 AND ${price} < 20)
+                  OR (${products_drync.category} = 'Spirit' AND ${price} >= 50 and ${price} < 100);;
       }
       when: {
         label: "Value"
-        sql: (${products.category} = 'Wine' AND ${price} < 20)
-                  OR (${products.category} in ('Beer', 'Other') AND ${price} < 10)
-                  OR (${products.category} = 'Spirit' AND ${price} < 50);;
+        sql: (${products_drync.category} = 'Wine' AND ${price} < 20)
+                  OR (${products_drync.category} in ('Beer', 'Other') AND ${price} < 10)
+                  OR (${products_drync.category} = 'Spirit' AND ${price} < 50);;
       }
       else: "Undefined"
     }

@@ -7,3 +7,7 @@ include: "../drync/drync.explore.view"
 explore: users {
 
 }
+
+explore: products_bridge {
+  label: "Products"
+}

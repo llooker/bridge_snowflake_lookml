@@ -3,10 +3,10 @@ include: "*.view.lkml"
 explore: product_clicked_drync {
   from:  product_clicked
   group_label: "Drync"
-  join: products {
+  join: products_drync {
     type: inner
     relationship: many_to_one
-    sql_on: ${product_clicked_drync.product_id} = ${products.id} ;;
+    sql_on: ${product_clicked_drync.product_id} = ${products_drync.id} ;;
   }
 
   join: fulfillers {
@@ -54,9 +54,9 @@ explore: users_drync {
     relationship: many_to_one
   }
 
-  join: products {
+  join: products_drync {
     type: inner
-    sql_on: ${product_clicked.product_id} = ${products.id} ;;
+    sql_on: ${product_clicked.product_id} = ${products_drync.id} ;;
     relationship: many_to_one
   }
 }
@@ -64,5 +64,9 @@ explore: users_drync {
 
 explore: orders_drync {
   from:  orders
+  group_label: "Drync"
+}
+
+explore: products_drync {
   group_label: "Drync"
 }
