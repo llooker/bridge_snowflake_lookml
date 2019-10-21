@@ -1,6 +1,10 @@
 view: order_order {
   sql_table_name: TIPSI.PUBLIC.ORDER_ORDER ;;
-  drill_fields: [id]
+
+
+  set: detail {
+    fields: [id, created_date, total_count, store_id, user_id]
+  }
 
   dimension: id {
     primary_key: yes

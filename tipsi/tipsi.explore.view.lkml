@@ -78,20 +78,20 @@ explore: users_tipsi {
   }
 }
 
-explore: orders {
+explore: orders_tipsi {
   from: order_order
   group_label: "Tipsi"
-  view_name: order_order
+  #view_name: order_order
   join: users {
     from: tipsi_auth_user
     type: inner
-    sql_on: ${users.id} = ${order_order.user_id} ;;
+    sql_on: ${users.id} = ${orders_tipsi.user_id} ;;
     relationship: many_to_one
   }
   join: order_orderproduct {
     view_label: "Order Product"
     type: left_outer
-    sql_on: ${order_order.id} = ${order_orderproduct.order_id} ;;
+    sql_on: ${orders_tipsi.id} = ${order_orderproduct.order_id} ;;
     relationship: many_to_one
   }
   join: vendor_drink {

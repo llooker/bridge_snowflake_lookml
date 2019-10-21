@@ -1,16 +1,16 @@
-view: orders_tipsi_bridge {
+view: orders_drync_bridge {
   derived_table: {
-    explore_source: orders_tipsi {
+    explore_source: orders_drync {
       column: id {}
-      column: created { field: orders_tipsi.created_date }
+      column: created { field: orders_drync.created_date }
       derived_column: gift_recipient {
         sql: null ;;
       }
       derived_column: source {
-        sql: 'tipsi' ;;
+        sql: 'drync' ;;
       }
-      column: quantity { field: orders_tipsi.total_count }
-      column: store_id {}
+      column: quantity {}
+      column: store_id { field: orders_drync.shopping_fulfiller_id }
       column: user_id {}
 
     }

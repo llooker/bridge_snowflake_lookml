@@ -11,3 +11,7 @@ explore: users {
 explore: products_bridge {
   label: "Products"
 }
+
+explore: orders_bridge {
+  label: "Orders"
+}
