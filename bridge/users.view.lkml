@@ -5,7 +5,7 @@ include: "../tipsi/tipsi_bridge/users.view.lkml"
 
 
 view: users {
-  # Or, you could make this view a derived table, like this:
+  extends: [users_fields]
   derived_table: {
     sql:  SELECT * FROM ${users_drync_bridge.SQL_TABLE_NAME}
             UNION
@@ -13,9 +13,18 @@ view: users {
           --left join genderize
       ;;
   }
+}
 
+view: users_fields {
+  extension: required
   dimension: id {
     type: number
+  }
+  dimension: p_key {
+    type: string
+    primary_key: yes #https://dryncapp.looker.com/explore/bridge/users?qid=jGuxnamUWNKWSfJbr767Hs
+    hidden: yes
+    sql: ${source} + ${id} ;;
   }
   dimension: email {}
   dimension: first_name {}
@@ -26,7 +35,26 @@ view: users {
   dimension: source {
     type: string
   }
-  dimension: gender {
-#     sql: coalesce(${TABLE}.gender,genderize.gender) ;;
+  dimension: gender {}
+  dimension: age {}
+  dimension: age_tiers {
+    type: tier
+    sql: ${age} ;;
+    tiers: [18, 30, 45, 70 ]
+    style: integer
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
+  }
+
+  measure: count_percent {
+    type: percent_of_total
+    sql: ${count} ;;
+  }
+
+  set: detail {
+    fields: [source, id, email, birth_year, first_name, last_name, age]
   }
 }

@@ -12,6 +12,8 @@ view: orders_drync_bridge {
       column: quantity {}
       column: store_id { field: orders_drync.shopping_fulfiller_id }
       column: user_id {}
+      column: discount {}
+      column: total_price {}
 
     }
   }
@@ -30,4 +32,6 @@ view: orders_drync_bridge {
   }
   dimension: store_id {}
   dimension: user_id {}
+  dimension: discount {}
+  dimension: total_price {}
 }

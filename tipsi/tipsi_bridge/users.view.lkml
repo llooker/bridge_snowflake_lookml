@@ -1,4 +1,7 @@
+include: "../../bridge/users.view"
+
 view: users_tipsi_bridge {
+  extends: [users_fields]
   derived_table: {
     explore_source: users_tipsi {
       column: id {}
@@ -10,20 +13,7 @@ view: users_tipsi_bridge {
         sql: 'tipsi' ;;
       }
       column: gender {}
-
+      column: age {}
     }
   }
-  dimension: id {
-    type: number
-  }
-  dimension: email {}
-  dimension: first_name {}
-  dimension: last_name {}
-  dimension: birth_year {
-    type: date_year
-  }
-  dimension: source {
-    type: string
-  }
-dimension: gender {}
 }

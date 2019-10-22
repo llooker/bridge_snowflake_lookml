@@ -12,6 +12,8 @@ view: orders_tipsi_bridge {
       column: quantity { field: orders_tipsi.total_count }
       column: store_id {}
       column: user_id {}
+      column: discount { field: orders_tipsi.products_discount }
+      column: total_price {}
 
     }
   }
@@ -30,4 +32,6 @@ view: orders_tipsi_bridge {
   }
   dimension: store_id {}
   dimension: user_id {}
+  dimension: discount {}
+  dimension: total_price {}
 }
