@@ -108,6 +108,14 @@ view: order_orderproduct {
     sql: ${TABLE}."WINE_ID" ;;
   }
 
+  dimension: bottle_id {
+    type: number
+    sql: CASE
+    WHEN ${wine_id} is null THEN ${drink_id}
+    WHEN ${drink_id} is null THEN ${wine_id}
+    ELSE NULL END;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, name]

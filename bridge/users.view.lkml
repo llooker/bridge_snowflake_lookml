@@ -10,7 +10,6 @@ view: users {
     sql:  SELECT * FROM ${users_drync_bridge.SQL_TABLE_NAME}
             UNION
           SELECT * FROM ${users_tipsi_bridge.SQL_TABLE_NAME}
-          --left join genderize
       ;;
   }
 }
@@ -23,8 +22,8 @@ view: users_fields {
   dimension: p_key {
     type: string
     primary_key: yes #https://dryncapp.looker.com/explore/bridge/users?qid=jGuxnamUWNKWSfJbr767Hs
-    hidden: yes
-    sql: ${source} + ${id} ;;
+    hidden: no
+    sql: ${source} || ${id} ;;
   }
   dimension: email {}
   dimension: first_name {}

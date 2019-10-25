@@ -1,4 +1,5 @@
 include: "*.view.lkml"
+include: "./derived_views/*.view.lkml"
 
 explore: product_clicked_drync {
   from:  product_clicked
@@ -69,4 +70,9 @@ explore: orders_drync {
 
 explore: products_drync {
   group_label: "Drync"
+}
+
+explore: order_products_drync {
+  group_label: "Drync"
+  hidden: yes
 }

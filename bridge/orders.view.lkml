@@ -16,6 +16,13 @@ view: orders_bridge {
   dimension: id {
     type: number
   }
+
+  dimension: source_id {
+    type: string
+    primary_key: yes
+    sql: ${source} || ${id} ;;
+  }
+
   dimension: created {}
   dimension: gift_recipient {
     type: string
@@ -28,6 +35,11 @@ view: orders_bridge {
   }
   dimension: store_id {}
   dimension: user_id {}
+
+  dimension: source_user_id {
+    type: string
+    sql: ${source} || ${user_id} ;;
+  }
   dimension: discount {}
   dimension: total_price {}
 
@@ -86,6 +98,4 @@ view: orders_bridge {
       }
     }
   }
-
-
 }

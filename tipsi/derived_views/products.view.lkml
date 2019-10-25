@@ -16,7 +16,7 @@ view: products_tipsi {
   }
 
   set: detail {
-    fields: [id, name, brand, category, subcategory]
+    fields: [id, product_id, name, brand, category, subcategory, variant, size]
   }
 
   dimension: id {
@@ -77,5 +77,10 @@ view: products_tipsi {
   dimension: subcategory {
     type:  string
     sql:  ${TABLE}.style ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
   }
 }

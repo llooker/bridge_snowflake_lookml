@@ -16,7 +16,18 @@ view: products_bridge {
   dimension: id {
     type: number
   }
+
+  dimension: pk_id {
+    type: string
+    primary_key: yes
+    sql: ${source} || ${id} ;;
+  }
   dimension: product_id {}
+
+  dimension: source_product_id {
+    sql: ${source} || ${product_id} ;;
+  }
+
   dimension: brand {}
   dimension: name {}
   dimension: variant {}
@@ -26,4 +37,8 @@ view: products_bridge {
   dimension: size {}
   dimension: category {}
   dimension: subcategory {}
+
+  measure: count {
+    type: count
+  }
 }
