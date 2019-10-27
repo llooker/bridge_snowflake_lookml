@@ -17,4 +17,9 @@ view: order_products {
     type: number
     sql: ${TABLE}.shipment_id ;;
   }
+
+  dimension: price_per_bottle {
+    type: number
+    sql: ${TABLE}.price_per_bottle ;;
+  }
 }

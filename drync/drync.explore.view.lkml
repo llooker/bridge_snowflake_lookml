@@ -43,6 +43,18 @@ explore: users_drync {
     relationship: one_to_many
   }
 
+  join: shipments {
+    type: left_outer
+    sql_on: ${orders.id} = ${shipments.order_id} ;;
+    relationship: one_to_many
+  }
+
+  join: order_products {
+    type: left_outer
+    sql_on: ${shipments.id} = ${order_products.shipment_id} ;;
+    relationship: many_to_one
+  }
+
   join: fulfillers {
     type: inner
     sql_on: ${orders.shopping_fulfiller_id} = ${fulfillers.id};;

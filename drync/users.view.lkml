@@ -80,6 +80,13 @@ view: users_drync {
     drill_fields: [email, last_name, birth_year, age, generation, products.brand, products.name, products.category, products.subcategory]
   }
 
+  measure: count_distinct {
+    type: count_distinct
+    sql_distinct_key: ${id} ;;
+    sql: ${id} ;;
+    drill_fields: [email, last_name, birth_year, age, generation, products.brand, products.name, products.category, products.subcategory]
+  }
+
   measure: percentage {
     type: percent_of_total
     sql: ${count} ;;
