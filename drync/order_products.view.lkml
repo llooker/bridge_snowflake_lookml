@@ -20,6 +20,7 @@ view: order_products {
 
   dimension: price_per_bottle {
     type: number
-    sql: ${TABLE}.price_per_bottle ;;
+    sql: ${TABLE}.price_per_bottle /100 ;;
+    value_format_name: usd
   }
 }
