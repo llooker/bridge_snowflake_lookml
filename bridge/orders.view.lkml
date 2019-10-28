@@ -30,9 +30,9 @@ view: orders_bridge {
   dimension: source {
     type: string
   }
-  dimension: quantity {
-    type: number
-  }
+#   dimension: quantity {
+#     type: number
+#   }
   dimension: store_id {}
   dimension: user_id {}
 
@@ -40,17 +40,11 @@ view: orders_bridge {
     type: string
     sql: ${source} || ${user_id} ;;
   }
-  dimension: discount {}
-  dimension: total_price {}
+#   dimension: discount {}
+#   dimension: total_price {}
 
   measure: count {
     type: count
-  }
-
-  measure: distinct_buyers {
-    type: count_distinct
-    sql_distinct_key: ${TABLE}.user_id ;;
-    sql: ${TABLE}.user_id ;;
   }
 
   measure: first_order  {
@@ -63,22 +57,9 @@ view: orders_bridge {
     sql: MAX(${created}) ;;
   }
 
-  measure: order_total {
-    type: sum
-    sql: ${total_price}  ;;
-    value_format_name: usd
-  }
-
-  measure: avg_order_value  {
-    type: number
-    sql: ${order_total} / nullif(${count},0) ;;
-    value_format_name: usd
-  }
-
-  measure: spend_per_user  {
-    type: number
-    sql: (${order_total} - ${discount})/nullif(${distinct_buyers},0);;
-    value_format_name: usd
+  measure: distinct_buyers {
+    type: count_distinct
+    sql: ${user_id} ;;
   }
 
   measure: lifetime_order_tier {

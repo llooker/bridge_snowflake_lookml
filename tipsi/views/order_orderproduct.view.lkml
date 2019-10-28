@@ -13,15 +13,14 @@ view: order_orderproduct {
     sql: ${TABLE}."BARCODES" ;;
   }
 
-  dimension: count_raw {
+  dimension: quantity {
     type: number
-    hidden: yes
     sql: ${TABLE}."COUNT" ;;
   }
 
   measure: total_quantity {
     type:  sum
-    sql: ${count_raw} ;;
+    sql: ${quantity} ;;
     description: "Needs to be confirmed if count_raw is quantity"
   }
 
@@ -46,7 +45,13 @@ view: order_orderproduct {
 
   dimension: discount_percent {
     type: number
-    sql: ${TABLE}."DISCOUNT_PERCENT" ;;
+    sql: ${TABLE}."DISCOUNT_PERCENT" /100 ;;
+    value_format_name: percent_0
+  }
+
+  dimension: discount_per_bottle {
+    type: number
+    sql: ${discount_percent} * ${price_per_bottle} ;;
   }
 
   dimension: discount_short_text {
@@ -82,6 +87,11 @@ view: order_orderproduct {
   dimension: order_id {
     type: number
     sql: ${TABLE}."ORDER_ID" ;;
+  }
+
+  dimension: price_per_bottle {
+    type: number
+    sql: ${total_price} /nullif(${quantity}, 0) ;;
   }
 
   dimension: total_price {

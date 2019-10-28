@@ -1,5 +1,5 @@
-view: shipments {
-  sql_table_name: PRODUCTION.PRODUCTION.SHIPMENTS ;;
+view: line_items {
+  sql_table_name: PRODUCTION.LINE_ITEMS ;;
   drill_fields: [id]
 
   dimension: id {
@@ -60,23 +60,29 @@ view: shipments {
     sql: ${TABLE}."_SDC_TABLE_VERSION" ;;
   }
 
-  dimension_group: accepted {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}."ACCEPTED_AT" ;;
+  dimension: amended_price_per_bottle {
+    type: number
+    sql: ${TABLE}."AMENDED_PRICE_PER_BOTTLE" ;;
   }
 
-  dimension: city {
+  dimension: bottle_id {
+    type: number
+    sql: ${TABLE}."BOTTLE_ID" ;;
+  }
+
+  dimension: bottle_name {
     type: string
-    sql: ${TABLE}."CITY" ;;
+    sql: ${TABLE}."BOTTLE_NAME" ;;
+  }
+
+  dimension: bottle_packaging {
+    type: string
+    sql: ${TABLE}."BOTTLE_PACKAGING" ;;
+  }
+
+  dimension: cork_id {
+    type: number
+    sql: ${TABLE}."CORK_ID" ;;
   }
 
   dimension_group: created {
@@ -93,72 +99,12 @@ view: shipments {
     sql: ${TABLE}."CREATED_AT" ;;
   }
 
-  dimension: credit_card_fee {
-    type: number
-    sql: ${TABLE}."CREDIT_CARD_FEE" ;;
+  dimension: current_vintage {
+    type: yesno
+    sql: ${TABLE}."CURRENT_VINTAGE" ;;
   }
 
-  dimension: discount {
-    type: number
-    sql: ${TABLE}."DISCOUNT" ;;
-  }
-
-  dimension: email {
-    type: string
-    sql: ${TABLE}."EMAIL" ;;
-  }
-
-  dimension: fulfiller_discount {
-    type: number
-    sql: ${TABLE}."FULFILLER_DISCOUNT" ;;
-  }
-
-  dimension: fulfiller_id {
-    type: number
-    sql: ${TABLE}."FULFILLER_ID" ;;
-  }
-
-  dimension: fulfillment_method {
-    type: string
-    sql: ${TABLE}."FULFILLMENT_METHOD" ;;
-  }
-
-  dimension: marketing_fee {
-    type: number
-    sql: ${TABLE}."MARKETING_FEE" ;;
-  }
-
-  dimension: marketing_fee_percent {
-    type: number
-    sql: ${TABLE}."MARKETING_FEE_PERCENT" ;;
-  }
-
-  dimension: name {
-    type: string
-    sql: ${TABLE}."NAME" ;;
-  }
-
-  dimension: order_id {
-    type: number
-    sql: ${TABLE}."ORDER_ID" ;;
-  }
-
-  dimension: payable_invoice_id {
-    type: number
-    sql: ${TABLE}."PAYABLE_INVOICE_ID" ;;
-  }
-
-  dimension: phone_number {
-    type: string
-    sql: ${TABLE}."PHONE_NUMBER" ;;
-  }
-
-  dimension: receivable_invoice_id {
-    type: number
-    sql: ${TABLE}."RECEIVABLE_INVOICE_ID" ;;
-  }
-
-  dimension_group: shipped {
+  dimension_group: deleted {
     type: time
     timeframes: [
       raw,
@@ -169,42 +115,80 @@ view: shipments {
       quarter,
       year
     ]
-    sql: ${TABLE}."SHIPPED_AT" ;;
+    sql: ${TABLE}."DELETED_AT" ;;
   }
 
-  dimension: shipping_cost {
+  dimension: deposit {
     type: number
-    sql: ${TABLE}."SHIPPING_COST" ;;
+    sql: ${TABLE}."DEPOSIT" ;;
   }
 
-  dimension: state {
+  dimension: discount_per_bottle {
+    type: number
+    sql: ${TABLE}."DISCOUNT_PER_BOTTLE"/100 ;;
+    value_format_name: usd
+  }
+
+  dimension: discount_rule_id {
+    type: number
+    sql: ${TABLE}."DISCOUNT_RULE_ID" ;;
+  }
+
+  dimension: exception_cause {
     type: string
-    sql: ${TABLE}."STATE" ;;
+    sql: ${TABLE}."EXCEPTION_CAUSE" ;;
+  }
+
+  dimension: fulfiller_price_per_bottle {
+    type: number
+    sql: ${TABLE}."FULFILLER_PRICE_PER_BOTTLE" ;;
+  }
+
+  dimension: markup_percentage {
+    type: number
+    sql: ${TABLE}."MARKUP_PERCENTAGE" ;;
+  }
+
+  dimension: message {
+    type: string
+    sql: ${TABLE}."MESSAGE" ;;
+  }
+
+  dimension: previous_price {
+    type: number
+    sql: ${TABLE}."PREVIOUS_PRICE" ;;
+  }
+
+  dimension: price_per_bottle {
+    type: number
+    sql: ${TABLE}."PRICE_PER_BOTTLE"/100 ;;
+    value_format_name: usd
+  }
+
+  dimension: quantity {
+    type: number
+    sql: ${TABLE}."QUANTITY" ;;
+  }
+
+  dimension: referer {
+    type: string
+    sql: ${TABLE}."REFERER" ;;
+  }
+
+  dimension: retailer_bottle_source_id {
+    type: number
+    sql: ${TABLE}."RETAILER_BOTTLE_SOURCE_ID" ;;
+  }
+
+  dimension: shipment_id {
+    type: number
+    # hidden: yes
+    sql: ${TABLE}."SHIPMENT_ID" ;;
   }
 
   dimension: status {
     type: string
     sql: ${TABLE}."STATUS" ;;
-  }
-
-  dimension: street1 {
-    type: string
-    sql: ${TABLE}."STREET1" ;;
-  }
-
-  dimension: street2 {
-    type: string
-    sql: ${TABLE}."STREET2" ;;
-  }
-
-  dimension: tax {
-    type: number
-    sql: ${TABLE}."TAX" ;;
-  }
-
-  dimension: tracking_number {
-    type: string
-    sql: ${TABLE}."TRACKING_NUMBER" ;;
   }
 
   dimension_group: update_expected_by {
@@ -235,13 +219,8 @@ view: shipments {
     sql: ${TABLE}."UPDATED_AT" ;;
   }
 
-  dimension: zip {
-    type: zipcode
-    sql: ${TABLE}."ZIP" ;;
-  }
-
   measure: count {
     type: count
-    drill_fields: [id, name, line_items.count]
+    drill_fields: [id, bottle_name, shipments.name, shipments.id]
   }
 }

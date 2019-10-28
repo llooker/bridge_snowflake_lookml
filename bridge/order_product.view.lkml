@@ -35,11 +35,52 @@ view: order_product_bridge {
     type: string
     sql: ${source} || ${bottle_id} ;;
   }
+
+  dimension: price_per_bottle {
+    type: number
+  }
+
+  dimension: quantity {
+    type: number
+  }
+
+  dimension: discount_per_bottle {
+    type: number
+  }
+
   dimension: source {
     type: string
   }
 
   measure: count {
     type: count
+  }
+
+  measure: order_count {
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
+
+  measure: order_total {
+    type: sum
+    sql: ${price_per_bottle} * ${quantity}  ;;
+    value_format_name: usd
+  }
+
+  measure: avg_order_value  {
+    type: number
+    sql: ${order_total} / nullif(${order_count},0) ;;
+    value_format_name: usd
+  }
+
+  measure: total_discount {
+    type: sum
+    sql: ${quantity} * ${discount_per_bottle} ;;
+  }
+
+  measure: spend_per_user  {
+    type: number
+    sql: (${order_total} - ${total_discount})/nullif(${orders_bridge.distinct_buyers},0);;
+    value_format_name: usd
   }
 }

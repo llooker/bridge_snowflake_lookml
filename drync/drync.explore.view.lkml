@@ -1,5 +1,4 @@
 include: "*.view.lkml"
-include: "./derived_views/*.view.lkml"
 
 explore: product_clicked_drync {
   from:  product_clicked
@@ -84,7 +83,11 @@ explore: products_drync {
   group_label: "Drync"
 }
 
-explore: order_products_drync {
+explore: line_items {
   group_label: "Drync"
-  hidden: yes
+  join: shipments {
+    type: left_outer
+    sql_on: ${line_items.shipment_id} = ${shipments.id} ;;
+    relationship: many_to_one
+  }
 }

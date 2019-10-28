@@ -27,11 +27,11 @@ view: orders_drync_bridge {
   dimension: source {
     type: string
   }
-  dimension: quantity {
-    type: number
-  }
+  #dimension: quantity {
+#     type: number
+#   }
   dimension: store_id {}
   dimension: user_id {}
-  dimension: discount {}
-  dimension: total_price {}
+#   dimension: discount {}
+#   dimension: total_price {}
 }
