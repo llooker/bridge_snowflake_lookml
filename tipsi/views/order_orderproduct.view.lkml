@@ -119,10 +119,10 @@ view: order_orderproduct {
   }
 
   dimension: bottle_id {
-    type: number
+    type: string
     sql: CASE
-    WHEN ${wine_id} is null THEN ${drink_id}
-    WHEN ${drink_id} is null THEN ${wine_id}
+    WHEN ${wine_id} is null THEN ${drink_id} || 'drink'
+    WHEN ${drink_id} is null THEN ${wine_id} || 'wine'
     ELSE NULL END;;
   }
 

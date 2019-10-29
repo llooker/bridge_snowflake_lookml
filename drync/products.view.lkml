@@ -24,6 +24,11 @@ view: products_drync {
     sql: ${TABLE}.product_id ;;
   }
 
+  dimension: bridge_product_id {
+    type: string
+    sql: ${product_id}::string ;;
+  }
+
   dimension: brand {
     type: string
     sql:${TABLE}.brand ;;

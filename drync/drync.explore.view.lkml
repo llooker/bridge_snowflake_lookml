@@ -48,9 +48,9 @@ explore: users_drync {
     relationship: one_to_many
   }
 
-  join: order_products {
+  join: line_items {
     type: left_outer
-    sql_on: ${shipments.id} = ${order_products.shipment_id} ;;
+    sql_on: ${shipments.id} = ${line_items.shipment_id} ;;
     relationship: many_to_one
   }
 

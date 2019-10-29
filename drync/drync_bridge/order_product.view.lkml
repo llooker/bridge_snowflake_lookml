@@ -3,7 +3,7 @@ view: order_product_drync_bridge {
     explore_source: line_items {
       column: id {}
       column: order_id { field: shipments.order_id }
-      column: bottle_id {}
+      column: bottle_id { field: line_items.bridge_bottle_id }
       column: price_per_bottle {}
       column: quantity {}
       column: discount_per_bottle {}

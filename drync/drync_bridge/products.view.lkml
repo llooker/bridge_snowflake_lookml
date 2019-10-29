@@ -2,7 +2,7 @@ view: products_drync_bridge {
   derived_table: {
     explore_source: products_drync {
       column: id {}
-      column: product_id {}
+      column: product_id { field: products_drync.bridge_product_id }
       column: brand {}
       column: name {}
       column: variant {}

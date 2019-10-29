@@ -1,6 +1,6 @@
 view: products_tipsi {
   derived_table: {
-      sql: select r.id, w.id as product_id, w.name as name, r.in_stock as quantity, r.unit_size as size, 4 as category, v.name as style, brand.name as brand
+      sql: select r.id, w.id || 'wine' as product_id, w.name as name, r.in_stock as quantity, r.unit_size as size, 4 as category, v.name as style, brand.name as brand
            from tipsi.public.retail_retailinventory r
            inner join tipsi.public.api_winetbl w on w.id = r.wine_id
            inner join tipsi.public.api_varietal v on v.id = w.varietal_id
@@ -8,7 +8,7 @@ view: products_tipsi {
 
           union
 
-          select r.id, d.id as product_id, d.name as name, r.in_stock as quantity, r.unit_size as size, d.drink_type as category, t.name as style, p.name as brand
+          select r.id, d.id || 'drink' as product_id, d.name as name, r.in_stock as quantity, r.unit_size as size, d.drink_type as category, t.name as style, p.name as brand
           from tipsi.public.retail_retailinventory r
           inner join tipsi.public.vendor_drink d on d.id = r.drink_id
           inner join tipsi.public.vendor_drinkproducer p on p.id = d.producer_id
@@ -26,7 +26,7 @@ view: products_tipsi {
   }
 
   dimension: product_id {
-    type: number
+    type: string
     sql: ${TABLE}.product_id ;;
   }
 

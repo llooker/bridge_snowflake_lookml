@@ -70,6 +70,11 @@ view: line_items {
     sql: ${TABLE}."BOTTLE_ID" ;;
   }
 
+  dimension: bridge_bottle_id {
+    type: string
+    sql: ${bottle_id}::string ;;
+  }
+
   dimension: bottle_name {
     type: string
     sql: ${TABLE}."BOTTLE_NAME" ;;
