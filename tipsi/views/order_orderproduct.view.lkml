@@ -121,8 +121,8 @@ view: order_orderproduct {
   dimension: bottle_id {
     type: string
     sql: CASE
-    WHEN ${wine_id} is null THEN ${drink_id} || 'drink'
-    WHEN ${drink_id} is null THEN ${wine_id} || 'wine'
+    WHEN ${wine_id} is null THEN ${drink_id}
+    WHEN ${drink_id} is null THEN ${wine_id}
     ELSE NULL END;;
   }
 

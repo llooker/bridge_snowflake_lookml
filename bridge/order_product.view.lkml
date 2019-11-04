@@ -3,7 +3,10 @@ include: "../tipsi/tipsi_bridge/order_product.view.lkml"
 
 
 
-
+# explore: order_product_bridge_useme {
+#   from: order
+#   label: "USE ME"
+# }
 view: order_product_bridge {
   # Or, you could make this view a derived table, like this:
   derived_table: {
@@ -14,6 +17,7 @@ view: order_product_bridge {
   }
 
   dimension: id {
+    label: "Line Item ID"
     type: number
   }
 
@@ -87,6 +91,6 @@ view: order_product_bridge {
   }
 
   set: detail {
-    fields: [order_id, source, price_per_bottle,quantity,products_bridge.name, products_bridge.category, products_bridge.brand, count, order_total]
+    fields: [id,order_id, source, price_per_bottle,quantity,products_bridge.name, products_bridge.category, products_bridge.brand,products_bridge.size, count, order_total]
   }
 }

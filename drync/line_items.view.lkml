@@ -71,6 +71,7 @@ view: line_items {
   }
 
   dimension: bridge_bottle_id {
+    description: "The bottle ID cast as a string"
     type: string
     sql: ${bottle_id}::string ;;
   }
