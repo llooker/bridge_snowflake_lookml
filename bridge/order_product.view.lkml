@@ -59,9 +59,11 @@ view: order_product_bridge {
   measure: order_count {
     type: count_distinct
     sql: ${order_id} ;;
+    drill_fields: [detail*]
   }
 
   measure: order_total {
+    label: "Total Spend"
     type: sum
     sql: ${price_per_bottle} * ${quantity}  ;;
     value_format_name: usd
@@ -82,5 +84,9 @@ view: order_product_bridge {
     type: number
     sql: (${order_total} - ${total_discount})/nullif(${orders_bridge.distinct_buyers},0);;
     value_format_name: usd
+  }
+
+  set: detail {
+    fields: [order_id, source, price_per_bottle,quantity,products_bridge.name, products_bridge.category, products_bridge.brand, count, order_total]
   }
 }
