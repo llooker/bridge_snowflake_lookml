@@ -82,6 +82,26 @@ explore: orders_tipsi {
   from: order_order
   group_label: "Tipsi"
   #view_name: order_order
+  join: retail_store {
+    type: inner
+    sql_on: ${orders_tipsi.store_id} = ${retail_store.restaurant_id} ;;
+    relationship: many_to_one
+  }
+  join: core_restaurant {
+    type: inner
+    sql_on: ${retail_store.restaurant_id} = ${core_restaurant.id} ;;
+    relationship: many_to_one
+  }
+  join: retail_retailstoregroupthrough {
+    type: inner
+    sql_on: ${core_restaurant.id} = ${retail_retailstoregroupthrough.store_id} ;;
+    relationship: many_to_one
+  }
+  join: retail_retailgroup {
+    type: inner
+    sql_on: ${retail_retailstoregroupthrough.group_id} = ${retail_retailgroup.id} ;;
+    relationship: many_to_one
+  }
   join: users {
     from: tipsi_auth_user
     type: inner
