@@ -27,6 +27,12 @@ explore: product_clicked_drync {
     relationship: many_to_one
   }
 
+  join: devices {
+    type: inner
+    sql_on: ${users_drync.id} = ${devices.id} ;;
+    relationship: many_to_one
+  }
+
   join: orders {
     type: inner
     sql_on: ${users_drync.id} = ${orders.user_id} ;;
@@ -36,6 +42,11 @@ explore: product_clicked_drync {
 
 explore: users_drync {
   group_label: "Drync"
+  join: devices {
+    type: inner
+    sql: ${users_drync.id} = ${devices.user_id} ;;
+    relationship: many_to_one
+  }
   join: orders {
     type: left_outer
     sql_on: ${users_drync.id} = ${orders.user_id} ;;
