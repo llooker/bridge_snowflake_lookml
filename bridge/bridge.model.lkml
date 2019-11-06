@@ -6,9 +6,14 @@ include: "../drync/drync.explore.view"
 include: "../throtle/attributes.view"
 
 explore: users {
+  join: attributes {
+    type: inner
+    sql_on: ${users.source_id} = ${attributes.id} ;;
+    relationship: one_to_one
+  }
   join: orders_bridge {
     type: left_outer
-    sql_on: ${users.p_key} = ${orders_bridge.source_user_id} ;;
+    sql_on: ${users.source_id} = ${orders_bridge.source_user_id} ;;
     relationship: many_to_many
   }
   join: order_product_bridge {
@@ -55,9 +60,13 @@ explore: order_product_bridge {
   join: users {
     view_label: "Users with Orders"
     type: left_outer
-    sql_on: ${orders_bridge.source_user_id} = ${users.p_key}  ;;
+    sql_on: ${orders_bridge.source_user_id} = ${users.source_id}  ;;
     relationship: many_to_one
-
+  }
+  join: attributes {
+    type: inner
+    sql_on: ${users.source_id} = ${attributes.id} ;;
+    relationship: one_to_one
   }
 }
 

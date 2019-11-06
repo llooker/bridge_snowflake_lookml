@@ -19,7 +19,7 @@ view: users_fields {
   dimension: id {
     type: number
   }
-  dimension: p_key {
+  dimension: source_id {
     type: string
     primary_key: yes #https://dryncapp.looker.com/explore/bridge/users?qid=jGuxnamUWNKWSfJbr767Hs
     hidden: no
