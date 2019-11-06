@@ -3,6 +3,7 @@ connection: "warehouse2"
 include: "*.view.lkml"
 include: "../tipsi/tipsi.explore.view"
 include: "../drync/drync.explore.view"
+include: "../throtle/attributes.view"
 
 explore: users {
   join: orders_bridge {
@@ -58,4 +59,8 @@ explore: order_product_bridge {
     relationship: many_to_one
 
   }
+}
+
+explore: attributes {
+
 }
