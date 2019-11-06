@@ -75,6 +75,23 @@ view: users_drync {
     }
   }
 
+  dimension: country {
+    type: string
+    sql: ${TABLE}.country ;;
+  }
+
+  dimension: state {
+    type: string
+    sql: ${TABLE}.state ;;
+    map_layer_name: us_states
+  }
+
+  dimension: zipcode {
+    type: string
+    sql: ${TABLE}.zipcode ;;
+    map_layer_name: us_zipcode_tabulation_areas
+  }
+
   measure: count {
     type: count
     drill_fields: [email, last_name, birth_year, age, generation, products.brand, products.name, products.category, products.subcategory]

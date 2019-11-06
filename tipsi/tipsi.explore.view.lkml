@@ -34,6 +34,12 @@ explore: products {
 explore: users_tipsi {
   from: tipsi_auth_user
   group_label: "Tipsi"
+  join: notifications_fcmdevice {
+    view_label: "Devices"
+    type: inner
+    sql_on: ${users_tipsi.id} = ${notifications_fcmdevice.user_id} ;;
+    relationship: many_to_one
+  }
   join: order_order {
     view_label: "Orders"
     type: left_outer
@@ -106,6 +112,12 @@ explore: orders_tipsi {
     from: tipsi_auth_user
     type: inner
     sql_on: ${users.id} = ${orders_tipsi.user_id} ;;
+    relationship: many_to_one
+  }
+  join: notifications_fcmdevice {
+    view_label: "Devices"
+    type: inner
+    sql_on: ${users.id} = ${notifications_fcmdevice.user_id} ;;
     relationship: many_to_one
   }
   join: order_orderproduct {
