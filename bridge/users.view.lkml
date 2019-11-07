@@ -36,6 +36,19 @@ view: users_fields {
   }
   dimension: gender {}
   dimension: age {}
+  dimension: state {}
+  dimension: us_states {
+    type: string
+    map_layer_name: us_states
+    sql: CASE
+    WHEN ${country} = 'US' THEN ${state}
+    ELSE NULL END ;;
+  }
+  dimension: zipcode {}
+  dimension: country {
+    type: string
+    map_layer_name: countries
+  }
   dimension: age_tiers {
     type: tier
     sql: ${age} ;;
