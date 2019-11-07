@@ -65,7 +65,7 @@ view: attributes {
       }
       when: {
         label: "Female"
-        sql: ${gender_raw} = 'S' ;;
+        sql: ${gender_raw} = 'F' ;;
       }
       else: "N/A"
     }
