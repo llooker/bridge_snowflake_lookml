@@ -79,6 +79,11 @@ view: order_product_bridge {
     value_format_name: usd
   }
 
+  measure: avg_basket_size {
+    type: number
+    sql: ${quantity} / nullif(${order_count},0) ;;
+  }
+
   measure: total_discount {
     type: sum
     sql: ${quantity} * ${discount_per_bottle} ;;
