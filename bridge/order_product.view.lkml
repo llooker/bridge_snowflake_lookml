@@ -79,9 +79,13 @@ view: order_product_bridge {
     value_format_name: usd
   }
 
+  measure: quantity_total {
+    type: number
+    sql: sum(${quantity}) ;;
+  }
   measure: avg_basket_size {
     type: number
-    sql: ${quantity} / nullif(${order_count},0) ;;
+    sql: AVG(${quantity}) ;;
   }
 
   measure: total_discount {
