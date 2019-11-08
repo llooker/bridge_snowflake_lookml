@@ -101,4 +101,19 @@ explore: line_items {
     sql_on: ${line_items.shipment_id} = ${shipments.id} ;;
     relationship: many_to_one
   }
+  join: orders {
+    type: left_outer
+    sql_on: ${shipments.order_id} = ${orders.id} ;;
+    relationship: one_to_many
+  }
+  join: fulfillers {
+    type: inner
+    sql_on: ${orders.shopping_fulfiller_id} = ${fulfillers.id};;
+    relationship: many_to_one
+  }
+  join: products_drync {
+    type: inner
+    sql_on: ${line_items.bottle_id} = ${products_drync.id} ;;
+    relationship: many_to_one
+  }
 }
