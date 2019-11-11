@@ -23,7 +23,25 @@ view: orders_bridge {
     sql: ${source} || ${id} ;;
   }
 
-  dimension: created {}
+  dimension: created {
+    hidden: yes
+  }
+
+  dimension_group: created_date {
+    type: time
+    timeframes: [
+      raw,
+      hour_of_day,
+      time,
+      date,
+      day_of_week,
+      week,
+      month,
+      quarter,
+      year
+    ]
+  sql: ${created} ;;
+  }
   dimension: gift_recipient {
     type: string
   }
