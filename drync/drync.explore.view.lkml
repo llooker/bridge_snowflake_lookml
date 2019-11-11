@@ -62,7 +62,7 @@ explore: users_drync {
   }
   join: devices {
     type: inner
-    sql: ${users_drync.id} = ${devices.user_id} ;;
+    sql_on: ${users_drync.id} = ${devices.user_id} ;;
     relationship: many_to_one
   }
   join: orders {
@@ -151,7 +151,7 @@ explore: line_items {
   }
   join: devices {
     type: inner
-    sql: ${users_drync.id} = ${devices.user_id} ;;
+    sql_on: ${users_drync.id} = ${devices.user_id} ;;
     relationship: many_to_one
   }
   join: fulfillers {
