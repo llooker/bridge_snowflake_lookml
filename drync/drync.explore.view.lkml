@@ -42,6 +42,24 @@ explore: product_clicked_drync {
 
 explore: users_drync {
   group_label: "Drync"
+  join: app_registrations {
+    type: inner
+    sql_on: ${app_registrations.user_id} = ${users_drync.id} ;;
+    relationship: one_to_many
+  }
+
+  join: apps {
+    type: inner
+    sql_on: ${app_registrations.app_id} = ${apps.id} ;;
+    relationship: many_to_one
+  }
+
+  join: app_sessions {
+    type: left_outer
+    relationship: one_to_many
+    sql_on:  ${apps.id} = ${app_sessions.app_id} AND ${app_sessions.user_id} = ${users_drync.id} ;;
+
+  }
   join: devices {
     type: inner
     sql: ${users_drync.id} = ${devices.user_id} ;;
@@ -105,6 +123,36 @@ explore: line_items {
     type: left_outer
     sql_on: ${shipments.order_id} = ${orders.id} ;;
     relationship: one_to_many
+  }
+
+  join: users_drync {
+    view_label: "Users"
+    type: left_outer
+    sql_on: ${orders.user_id} = ${users_drync.id} ;;
+    relationship: many_to_one
+  }
+  join: app_registrations {
+    type: inner
+    sql_on: ${app_registrations.user_id} = ${users_drync.id} ;;
+    relationship: one_to_many
+  }
+
+  join: apps {
+    type: inner
+    sql_on: ${app_registrations.app_id} = ${apps.id} ;;
+    relationship: many_to_one
+  }
+
+  join: app_sessions {
+    type: left_outer
+    relationship: one_to_many
+    sql_on:  ${apps.id} = ${app_sessions.app_id} AND ${app_sessions.user_id} = ${users_drync.id} ;;
+
+  }
+  join: devices {
+    type: inner
+    sql: ${users_drync.id} = ${devices.user_id} ;;
+    relationship: many_to_one
   }
   join: fulfillers {
     type: inner
