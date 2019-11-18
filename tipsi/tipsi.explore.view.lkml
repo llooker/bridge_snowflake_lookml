@@ -166,3 +166,8 @@ explore: order_products_tipsi {
   from: order_orderproduct
   group_label: "Tipsi"
 }
+
+explore: devices_tipsi {
+  from: notifications_fcmdevice
+  group_label: "Tipsi"
+}

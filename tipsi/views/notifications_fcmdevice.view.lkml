@@ -36,6 +36,11 @@ view: notifications_fcmdevice {
     sql: ${TABLE}."USER_ID" ;;
   }
 
+  dimension: id {
+    type: number
+    sql: ${TABLE}."ID" ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [name]
