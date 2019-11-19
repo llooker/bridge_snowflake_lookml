@@ -28,12 +28,14 @@ explore: product_clicked_drync {
   }
 
   join: devices {
+    from: devices_drync
     type: inner
     sql_on: ${users_drync.id} = ${devices.id} ;;
     relationship: many_to_one
   }
 
   join: orders {
+    from: orders_drync
     type: inner
     sql_on: ${users_drync.id} = ${orders.user_id} ;;
     relationship: one_to_many
@@ -61,11 +63,13 @@ explore: users_drync {
 
   }
   join: devices {
+    from: devices_drync
     type: inner
     sql_on: ${users_drync.id} = ${devices.user_id} ;;
     relationship: many_to_one
   }
   join: orders {
+    from: orders_drync
     type: left_outer
     sql_on: ${users_drync.id} = ${orders.user_id} ;;
     relationship: one_to_many
@@ -104,11 +108,14 @@ explore: users_drync {
 
 
 explore: orders_drync {
-  from:  orders
   group_label: "Drync"
 }
 
 explore: products_drync {
+  group_label: "Drync"
+}
+
+explore: devices_drync {
   group_label: "Drync"
 }
 
@@ -120,6 +127,7 @@ explore: line_items {
     relationship: many_to_one
   }
   join: orders {
+    from: orders_drync
     type: left_outer
     sql_on: ${shipments.order_id} = ${orders.id} ;;
     relationship: one_to_many
@@ -150,6 +158,7 @@ explore: line_items {
 
   }
   join: devices {
+    from: devices_drync
     type: inner
     sql_on: ${users_drync.id} = ${devices.user_id} ;;
     relationship: many_to_one

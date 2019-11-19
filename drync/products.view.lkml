@@ -77,4 +77,32 @@ view: products_drync {
     type:  string
     sql:  ${TABLE}.style ;;
   }
+  # 4 ndt {
+    dimension: brand_id {
+      sql: ${brand} ;;
+      hidden: yes
+    }
+    dimension: department_id {
+      sql: ${brand} ;;
+      hidden: yes
+    }
+    dimension: department_name {
+      sql: ${brand} ;;
+      hidden: yes
+    }
+  #}
+  # derived_table: {
+  #   explore_source: line_items {
+  #     column: transaction_id { field: shipments.order_id }
+  #     column: order_created_time { field: orders.created_time }
+  #     column: SKU_id { field: products_drync.id }
+  #     column: SKU_name { field: products_drync.name }
+  #     column: brand_id { field: products_drync.brand }
+  #     column: brand_name { field: products_drync.brand }
+  #     column: department_id { field: products_drync.brand }
+  #     column: department_name { field: products_drync.brand }
+  #     column: user_id { field: orders.user_id }
+  #     column: sale_amt { field: orders.sale_price }
+  #     column: margin_amt { field: orders.sale_price }
+  #   }
 }

@@ -1,5 +1,5 @@
 view: notifications_fcmdevice {
-  sql_table_name: PUBLIC.NOTIFICATIONS_FCMDEVICE ;;
+  sql_table_name: TIPSI.PUBLIC.NOTIFICATIONS_FCMDEVICE ;;
 
   dimension: device_id {
     type: string

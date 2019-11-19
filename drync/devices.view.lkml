@@ -1,4 +1,4 @@
-view: devices {
+view: devices_drync {
   sql_table_name: PRODUCTION.DEVICES ;;
   drill_fields: [device_identifier]
 

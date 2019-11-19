@@ -4,6 +4,8 @@ include: "*.view.lkml"
 include: "../tipsi/tipsi.explore.view"
 include: "../drync/drync.explore.view"
 include: "../throtle/attributes.view"
+include: "../affinity/affinity_analysis.view"
+include: "../affinity/item_affinity_analysis.dashboard"
 
 explore: users {
   join: attributes {
@@ -73,3 +75,5 @@ explore: order_product_bridge {
 explore: attributes {
 
 }
+
+explore: devices_bridge {}

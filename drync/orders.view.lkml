@@ -1,4 +1,4 @@
-view: orders {
+view: orders_drync {
    sql_table_name: marketing.public.orders ;;
 
   dimension: id {
@@ -371,6 +371,29 @@ view: orders {
     sql: ${deposit}/100.0 ;;
     value_format: "$#,##0.00"
   }
+
+  # 4 ndt {
+    dimension: margin_amt {
+      sql: ${sale_price} ;;
+      hidden: yes
+      type: number
+    }
+  #}
+
+  # derived_table: {
+  #   explore_source: line_items {
+  #     column: transaction_id { field: shipments.order_id }
+  #     column: order_created_time { field: orders.created_time }
+  #     column: SKU_id { field: products_drync.id }
+  #     column: SKU_name { field: products_drync.name }
+  #     column: brand_id { field: products_drync.brand }
+  #     column: brand_name { field: products_drync.brand }
+  #     column: department_id { field: products_drync.brand }
+  #     column: department_name { field: products_drync.brand }
+  #     column: user_id { field: orders.user_id }
+  #     column: sale_amt { field: orders.sale_price }
+  #     column: margin_amt { field: orders.sale_price }
+  #   }
 
   # ----- Sets of fields for drilling ------
   set: detail {

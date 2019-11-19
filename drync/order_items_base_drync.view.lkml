@@ -6,13 +6,13 @@ view: order_items_base_drync {
       column: order_created_time { field: orders.created_time }
       column: SKU_id { field: products_drync.id }
       column: SKU_name { field: products_drync.name }
-      column: brand_id { field: products_drync.brand }
+      column: brand_id { field: products_drync.brand_id }
       column: brand_name { field: products_drync.brand }
-      column: department_id { field: products_drync.brand }
-      column: department_name { field: products_drync.brand }
+      column: department_id { field: products_drync.department_id }
+      column: department_name { field: products_drync.department_name }
       column: user_id { field: orders.user_id }
       column: sale_amt { field: orders.sale_price }
-      column: margin_amt { field: orders.sale_price }
+      column: margin_amt { field: orders.margin_amt }
     }
   }
   dimension: transaction_id {
