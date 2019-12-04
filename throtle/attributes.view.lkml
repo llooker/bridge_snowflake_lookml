@@ -41,7 +41,7 @@ view: attributes {
         label: "Millennial"
         sql: ${birth_year} > 1980 AND ${birth_year} <= 2000;;
       }
-      else: "Undefined"
+      else: "N/A"
     }
   }
 

@@ -3,7 +3,7 @@ connection: "warehouse2"
 include: "*.view.lkml"
 include: "../tipsi/tipsi.explore.view"
 include: "../drync/drync.explore.view"
-include: "../throtle/attributes.view"
+include: "../throtle/*.view"
 include: "../affinity/affinity_analysis.view"
 include: "../affinity/item_affinity_analysis.dashboard"
 
@@ -11,6 +11,11 @@ explore: users {
   join: attributes {
     type: inner
     sql_on: ${users.source_id} = ${attributes.id} ;;
+    relationship: one_to_one
+  }
+  join: attributes_extended {
+    type: inner
+    sql_on: ${users.source_id} = ${attributes_extended.id} ;;
     relationship: one_to_one
   }
   join: orders_bridge {
@@ -68,6 +73,11 @@ explore: order_product_bridge {
   join: attributes {
     type: inner
     sql_on: ${users.source_id} = ${attributes.id} ;;
+    relationship: one_to_one
+  }
+  join: attributes_extended {
+    type: inner
+    sql_on: ${users.source_id} = ${attributes_extended.id} ;;
     relationship: one_to_one
   }
 }
