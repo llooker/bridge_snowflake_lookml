@@ -1,5 +1,5 @@
 datagroup: bridge_default {
-  sql_trigger: select count(*) from ${order_product.SQL_TABLE_NAME} ;;
+  sql_trigger: select count(*) from production.production.line_items ;;
   max_cache_age: "720 hours"
 }
 
