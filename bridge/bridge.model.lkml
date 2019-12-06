@@ -11,12 +11,12 @@ explore: users {
   join: attributes {
     type: inner
     sql_on: ${users.source_id} = ${attributes.id} ;;
-    relationship: one_to_one
+    relationship: one_to_many
   }
   join: attributes_extended {
     type: inner
     sql_on: ${users.source_id} = ${attributes_extended.id} ;;
-    relationship: one_to_one
+    relationship: one_to_many
   }
   join: orders_bridge {
     type: left_outer
@@ -78,12 +78,14 @@ explore: order_product_bridge {
   join: attributes_extended {
     type: inner
     sql_on: ${users.source_id} = ${attributes_extended.id} ;;
-    relationship: one_to_one
+    relationship: many_to_one
   }
 }
 
 explore: attributes {
 
 }
+
+explore: attributes_extended {}
 
 explore: devices_bridge {}
