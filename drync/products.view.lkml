@@ -38,6 +38,11 @@ view: products_drync {
     }
   }
 
+  dimension: cleaned_brand_name {
+    type: string
+    sql: REGEXP_REPLACE(${brand}, '(,|\')', '') ;;
+  }
+
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
