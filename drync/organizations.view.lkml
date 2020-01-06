@@ -1,4 +1,4 @@
-view: organizations {
+view: organizations_drync {
   sql_table_name: production.production.organizations;;
 
   dimension: id {

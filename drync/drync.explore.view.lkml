@@ -16,6 +16,7 @@ explore: product_clicked_drync {
   }
 
   join: organizations {
+    from: organizations_drync
     type: inner
     sql_on: ${fulfillers.organization_id}=${organizations.id} ;;
     relationship: many_to_one

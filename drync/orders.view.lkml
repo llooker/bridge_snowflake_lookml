@@ -344,7 +344,7 @@ view: orders_drync {
 
   measure: total_tax {
     type: sum
-    sql: (${tax}) / 100.0 ;;
+    sql: (${tax}) / 100.0 );;
     value_format: "$#,##0.00"
   }
 
@@ -372,9 +372,25 @@ view: orders_drync {
     value_format: "$#,##0.00"
   }
 
+  measure: percent_of_previous {
+    type: percent_of_previous
+    sql: ${order_total} ;;
+  }
+
+  measure: percent_change {
+    type: percent_of_total
+    sql: ${order_total} / offset(${order_total}, -1) -1  ;;
+  }
+
+  measure: aggregate_sales {
+    type: number
+    sql: sum(offset_list(${order_total}, 1-row(), row())) ;;
+    value_format_name: usd
+  }
+
   # 4 ndt {
     dimension: margin_amt {
-      sql: ${sale_price} ;;
+      sql: ${sale_price} - ${sale_price}/1.2 ;;
       hidden: yes
       type: number
     }

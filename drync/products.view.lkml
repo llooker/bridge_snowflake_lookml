@@ -95,6 +95,15 @@ view: products_drync {
       sql: ${brand} ;;
       hidden: yes
     }
+
+    measure: count {
+      type: count
+    }
+
+    measure: count_distinct_brands {
+      type: count_distinct
+      sql: ${cleaned_brand_name} ;;
+    }
   #}
   # derived_table: {
   #   explore_source: line_items {
