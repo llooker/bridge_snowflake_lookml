@@ -158,17 +158,27 @@ explore: line_items {
     sql_on:  ${apps.id} = ${app_sessions.app_id} AND ${app_sessions.user_id} = ${users_drync.id} ;;
 
   }
+
   join: devices {
     from: devices_drync
     type: inner
     sql_on: ${users_drync.id} = ${devices.user_id} ;;
     relationship: many_to_one
   }
+
   join: fulfillers {
     type: inner
     sql_on: ${orders.shopping_fulfiller_id} = ${fulfillers.id};;
     relationship: many_to_one
   }
+
+  join: organizations {
+    from: organizations_drync
+    type: inner
+    sql_on: ${fulfillers.organization_id}=${organizations.id} ;;
+    relationship: many_to_one
+  }
+
   join: products_drync {
     type: inner
     sql_on: ${line_items.bottle_id} = ${products_drync.id} ;;
