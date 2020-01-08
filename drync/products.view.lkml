@@ -48,6 +48,11 @@ view: products_drync {
     sql: ${TABLE}.name ;;
   }
 
+  dimension: cleaned_name {
+    type: string
+    sql: REGEXP_REPLACE(${name}, '(,|\')', '') ;;
+  }
+
   dimension: variant {
     type: string
     sql: ${TABLE}.quantity::string || ' ' || ${TABLE}.size || ' ' || ${TABLE}.type ;;
