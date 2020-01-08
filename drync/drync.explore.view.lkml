@@ -184,4 +184,11 @@ explore: line_items {
     sql_on: ${line_items.bottle_id} = ${products_drync.id} ;;
     relationship: many_to_one
   }
+
+  join: retailer_bottle_sources {
+    type: left_outer
+    sql: ${retailer_bottle_sources.id} = ${line_items.retailer_bottle_source_id} ;;
+    relationship: one_to_many
+
+  }
 }
