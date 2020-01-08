@@ -134,6 +134,12 @@ explore: line_items {
     relationship: one_to_many
   }
 
+  join: order_percentage {
+    type: inner
+    sql_on: ${orders.id} = ${order_percentage.order_id} ;;
+    relationship: many_to_one
+  }
+
   join: users_drync {
     view_label: "Users"
     type: left_outer
