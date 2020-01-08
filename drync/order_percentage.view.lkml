@@ -44,4 +44,9 @@ view: order_percentage {
     value_format_name: percent_0
   }
 
+  dimension: percent_change {
+    type: number
+    sql: ${total}/nullif(${prev_val},0) - 1 ;;
+    value_format_name: percent_0
+  }
 }
