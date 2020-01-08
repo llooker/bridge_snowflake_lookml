@@ -1,6 +1,6 @@
 view: order_percentage {
   derived_table: {
-    sql: SELECT id as order_id, created_at, total, LAG((total/100)) OVER(order by created_at asc) as prev_val FROM marketing.public.orders ;;
+    sql: SELECT id as order_id, created_at, total, LAG((total/100)) OVER(order by created_at asc) as prev_val FROM marketing.public.orders WHERE total > 0 ;;
   }
 
   dimension: order_id {
