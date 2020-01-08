@@ -187,7 +187,7 @@ explore: line_items {
 
   join: retailer_bottle_sources {
     type: left_outer
-    sql: ${retailer_bottle_sources.id} = ${line_items.retailer_bottle_source_id} ;;
+    sql_on: ${retailer_bottle_sources.id} = ${line_items.retailer_bottle_source_id} ;;
     relationship: one_to_many
 
   }

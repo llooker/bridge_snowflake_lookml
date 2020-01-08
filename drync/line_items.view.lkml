@@ -183,7 +183,7 @@ view: line_items {
 
   dimension: retailer_bottle_source_id {
     type: number
-    sql: ${TABLE}."RETAILER_BOTTLE_SOURCE_ID" ;;
+    sql: ${TABLE}.retailer_bottle_source_id ;;
   }
 
   dimension: shipment_id {
