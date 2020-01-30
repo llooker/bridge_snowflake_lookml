@@ -1,4 +1,4 @@
-explore: order_items_base_drync {}
+
 view: order_items_base_drync {
   derived_table: {
     explore_source: line_items {
@@ -18,8 +18,10 @@ view: order_items_base_drync {
   dimension: transaction_id {
     type: number
   }
-  dimension: order_created_time {
-    type: date_time
+  dimension_group: created {
+    type: time
+    datatype: timestamp
+    sql: ${TABLE}.order_created_time ;;
   }
   dimension: id {
     type: number
@@ -29,5 +31,8 @@ view: order_items_base_drync {
   dimension: sale_price {
     value_format: "$#,##0.00"
     type: number
+  }
+  measure: count {
+    type: count
   }
 }

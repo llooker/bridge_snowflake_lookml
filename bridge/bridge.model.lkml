@@ -41,10 +41,13 @@ explore: products_bridge {
 
 explore: orders_bridge {
   label: "Orders"
+  sql_always_where: (${orders_bridge.status} NOT IN  ('cancelled','declined') OR ${orders_bridge.id} IS NULL)  ;;
+
 }
 
 explore: order_product_bridge {
-  label: "Order Products"
+  label: "Order Items"
+  sql_always_where: (${orders_bridge.status} NOT IN  ('cancelled','declined') OR ${orders_bridge.id} IS NULL)  ;;
   join: products_bridge {
     type: left_outer
     sql_on: ${order_product_bridge.bottle_id} =

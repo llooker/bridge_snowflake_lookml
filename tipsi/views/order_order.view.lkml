@@ -63,7 +63,7 @@ view: order_order {
 
   dimension: order_status {
     type: number
-    sql: ${TABLE}."ORDER_STATUS" ;;
+    sql: ${TABLE}."ORDER_STATUS"::varchar;;
   }
 
   dimension_group: payment {
@@ -129,6 +129,11 @@ view: order_order {
     type: number
     sql: ${TABLE}."TOTAL_PRICE" ;;
   }
+
+dimension: actual_order_price {
+  type: number
+  sql: 0 ;;
+}
 
   dimension_group: updated {
     type: time

@@ -23,11 +23,8 @@ view: orders_bridge {
     sql: ${source} || ${id} ;;
   }
 
-  dimension: created {
-    hidden: yes
-  }
 
-  dimension_group: created_date {
+  dimension_group: created {
     type: time
     timeframes: [
       raw,
@@ -40,7 +37,7 @@ view: orders_bridge {
       quarter,
       year
     ]
-  sql: ${created} ;;
+  sql: ${TABLE}.created_time ;;
   }
   dimension: gift_recipient {
     type: string
@@ -58,21 +55,43 @@ view: orders_bridge {
     type: string
     sql: ${source} || ${user_id} ;;
   }
+  dimension: status {
+    type: string
+  }
 #   dimension: discount {}
-#   dimension: total_price {}
+  dimension: total_price_raw {
+    label: "Total Price"
+    type: number
+    hidden: yes
+    sql: ${TABLE}.total_price ;;
+  }
 
+  dimension: actual_order_price {
+    type: number
+    value_format_name: usd
+  }
+  measure: total_price {
+    description: "DO NOT USE!  This breaks as soon as the query is grouped by line item or product"
+    hidden: yes
+    value_format_name: usd
+    type: sum
+    sql: ${total_price_raw} ;;
+    drill_fields: [id, created_time,source, source_user_id, source_id, total_price_raw]
+
+  }
   measure: count {
     type: count
+    drill_fields: [id, created_time,source, source_user_id, source_id]
   }
 
   measure: first_order  {
     type: date
-    sql: MIN(${created}) ;;
+    sql: MIN(${created_time}) ;;
   }
 
   measure: last_order  {
     type: date
-    sql: MAX(${created}) ;;
+    sql: MAX(${created_time}) ;;
   }
 
   measure: distinct_buyers {

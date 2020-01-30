@@ -10,6 +10,9 @@ view: order_product_drync_bridge {
       derived_column: source {
         sql: 'drync' ;;
       }
+      derived_column: order_list_price {
+        sql: sum(price_per_bottle*quantity) over (partition by order_id) ;;
+      }
     }
   }
   dimension: id {
@@ -27,6 +30,9 @@ view: order_product_drync_bridge {
     type: number
   }
   dimension: quantity {
+    type: number
+  }
+  dimension: order_list_price {
     type: number
   }
   dimension: discount_per_bottle {

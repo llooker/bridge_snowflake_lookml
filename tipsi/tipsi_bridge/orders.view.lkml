@@ -2,7 +2,7 @@ view: orders_tipsi_bridge {
   derived_table: {
     explore_source: orders_tipsi {
       column: id {}
-      column: created { field: orders_tipsi.created_date }
+      column: created_time { field: orders_tipsi.created_time }
       derived_column: gift_recipient {
         sql: null ;;
       }
@@ -14,13 +14,17 @@ view: orders_tipsi_bridge {
       column: user_id {}
       column: discount { field: orders_tipsi.products_discount }
       column: total_price {}
-
+      column: status {field: orders_tipsi.order_status}
+      column: actual_order_price {}
     }
   }
   dimension: id {
     type: number
   }
-  dimension: created {}
+  dimension_group: created {
+    type: time
+    sql: ${TABLE}.created_time ;;
+  }
   dimension: gift_recipient {
     type: string
   }
@@ -34,4 +38,5 @@ view: orders_tipsi_bridge {
   dimension: user_id {}
   dimension: discount {}
   dimension: total_price {}
+  dimension: status {}
 }

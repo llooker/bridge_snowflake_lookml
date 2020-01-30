@@ -77,23 +77,23 @@ view: orders_drync {
 
   dimension: delivery_tip {
     type: number
-    sql: ${TABLE}.delivery_tip ;;
+    sql: ${TABLE}.delivery_tip /100.0;;
   }
 
   dimension: deposit {
     type: number
-    sql: ${TABLE}.deposit ;;
+    sql: ${TABLE}.deposit/100.0 ;;
   }
 
   dimension: discount {
     type: number
-    sql: ${TABLE}.discount / 100 ;;
+    sql: ${TABLE}.discount / 100.0 ;;
     value_format_name: usd
   }
 
   dimension: discount_adjustment {
     type: number
-    sql: ${TABLE}.discount_adjustment ;;
+    sql: ${TABLE}.discount_adjustment /100.0;;
   }
 
   dimension: driver {
@@ -194,12 +194,12 @@ view: orders_drync {
 
   dimension: shipping {
     type: number
-    sql: ${TABLE}.shipping ;;
+    sql: ${TABLE}.shipping/ 100.0 ;;
   }
 
   dimension: shipping_adjustment {
     type: number
-    sql: ${TABLE}.shipping_adjustment ;;
+    sql: ${TABLE}.shipping_adjustment/ 100.0 ;;
   }
 
   dimension: shopping_fulfiller_id {
@@ -214,14 +214,14 @@ view: orders_drync {
 
   dimension: sub_total {
     type: number
-    sql: ${TABLE}.sub_total/100 ;;
+    sql: ${TABLE}.sub_total/100.0 ;;
     value_format_name: usd
     hidden: no
   }
 
   dimension: tax {
     type: number
-    sql: ${TABLE}.tax ;;
+    sql: ${TABLE}.tax/ 100.0  ;;
   }
 
   dimension: total_price {
@@ -229,6 +229,17 @@ view: orders_drync {
     value_format_name: usd
     type: number
     sql: ${TABLE}.total / 100.0 ;;
+  }
+
+
+  dimension: actual_order_price {
+    type: number
+    sql: ${sub_total} - ${discount}
+          + ${delivery_tip}
+          +  ${tax}
+          + ${deposit}
+          + ${shipping} + ${shipping_adjustment}
+          ;;
   }
 
   dimension_group: updated {
@@ -274,25 +285,25 @@ view: orders_drync {
 
   measure: net_total {
     type: sum
-    sql: (${sub_total} - ${discount} + ${deposit}) / 100.0;;
+    sql: (${sub_total} - ${discount} + ${deposit});;
     value_format: "$#,##0.00"
   }
 
   measure: product_total {
     type: sum
-    sql: ${sub_total}/100.0 ;;
+    sql: ${sub_total};;
     value_format: "$#,##0.00"
   }
 
   measure: net_product_total {
     type: sum
-    sql: (${sub_total} - ${discount}) / 100.0;;
+    sql: (${sub_total} - ${discount});;
     value_format: "$#,##0.00"
   }
 
   measure: order_sub_total {
     type: sum
-    sql: (${sub_total} - ${discount}) / 100.0 ;;
+    sql: (${sub_total} - ${discount}) ;;
     value_format: "$#,##0.00"
   }
 
@@ -344,31 +355,31 @@ view: orders_drync {
 
   measure: total_tax {
     type: sum
-    sql: (${tax}) / 100.0 );;
+    sql: ${tax};;
     value_format: "$#,##0.00"
   }
 
   measure: total_delivery_tip {
     type: sum
-    sql: ${TABLE}.delivery_tip/100.0 ;;
+    sql: ${delivery_tip} ;;
     value_format: "$#,##0.00"
   }
 
   measure: total_shipping {
     type: sum
-    sql: (${shipping} + ${shipping_adjustment}) / 100.0  ;;
+    sql: (${shipping} + ${shipping_adjustment})   ;;
     value_format: "$#,##0.00"
   }
 
   measure: total_discount {
     type: sum
-    sql: (${discount}+ ${discount_adjustment})/100.0 ;;
+    sql: (${discount}+ ${discount_adjustment}) ;;
     value_format: "$#,##0.00"
   }
 
   measure: total_deposit {
     type: sum
-    sql: ${deposit}/100.0 ;;
+    sql: ${deposit} ;;
     value_format: "$#,##0.00"
   }
 

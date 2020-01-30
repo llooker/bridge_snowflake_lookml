@@ -2,7 +2,7 @@ view: orders_drync_bridge {
   derived_table: {
     explore_source: orders_drync {
       column: id {}
-      column: created { field: orders_drync.created_date }
+      column: created_time { field: orders_drync.created_time }
       derived_column: gift_recipient {
         sql: null ;;
       }
@@ -14,13 +14,24 @@ view: orders_drync_bridge {
       column: user_id {}
       column: discount {}
       column: total_price {}
+      column: status {field: orders_drync.status}
+      column: actual_order_price {}
+#       column: sub_total {}
+#       column: deposit {}
+#       column: tax {}
+#       column: shippping {}
+#       column: shipping_adjustment {}
+#       column: deliver_tip {}
 
     }
   }
   dimension: id {
     type: number
   }
-  dimension: created {}
+  dimension_group: created {
+    type: time
+    sql: ${TABLE}.created_time ;;
+  }
   dimension: gift_recipient {
     type: string
   }
@@ -32,6 +43,7 @@ view: orders_drync_bridge {
 #   }
   dimension: store_id {}
   dimension: user_id {}
+  dimension: status {}
 #   dimension: discount {}
 #   dimension: total_price {}
 }

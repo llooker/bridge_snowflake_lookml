@@ -14,6 +14,9 @@ view: order_product_tipsi_bridge {
         derived_column: source {
           sql: 'tipsi' ;;
         }
+        derived_column: order_list_price {
+          sql: sum(price_per_bottle*quantity) over (partition by order_id) ;;
+        }
       }
     }
     dimension: id {
@@ -37,5 +40,8 @@ view: order_product_tipsi_bridge {
     }
     dimension: source {
       type: string
+    }
+    dimension: order_list_price {
+      type: number
     }
   }

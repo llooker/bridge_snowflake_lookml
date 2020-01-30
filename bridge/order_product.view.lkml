@@ -8,6 +8,7 @@ include: "../tipsi/tipsi_bridge/order_product.view.lkml"
 #   label: "USE ME"
 # }
 view: order_product_bridge {
+  view_label: "Order Items"
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT * FROM ${order_product_drync_bridge.SQL_TABLE_NAME}
@@ -56,6 +57,31 @@ view: order_product_bridge {
     type: string
   }
 
+  dimension: order_list_price {
+    type: number
+    value_format_name: usd
+  }
+
+  dimension: line_item_list_price {
+    type: number
+    value_format_name: usd
+    sql: ${price_per_bottle} * ${quantity} ;;
+  }
+  dimension: percent_of_order {
+    type: number
+    sql: ${line_item_list_price} / ${order_list_price} ;;
+    value_format_name: percent_2
+  }
+  dimension: line_item_actual_price {
+    type: number
+    sql: ${orders_bridge.total_price_raw}*${percent_of_order} ;;
+  }
+  measure: total_price {
+    value_format_name: usd
+    type: sum
+    sql: ${line_item_actual_price} ;;
+  }
+
   measure: count {
     type: count
   }
@@ -66,16 +92,19 @@ view: order_product_bridge {
     drill_fields: [detail*]
   }
 
-  measure: order_total {
-    label: "Total Spend"
-    type: sum
-    sql: ${price_per_bottle} * ${quantity}  ;;
-    value_format_name: usd
-  }
+#   measure: order_total {
+#     label: "Total List Price"
+#     hidden: yes
+#     description: "DO NOT USE!  Does not include shipping, discounts, tax, tip, or deposit.  This is NOT the actual price paid for goods."
+#     type: sum
+#     sql: ${price_per_bottle} * ${quantity}  ;;
+#     value_format_name: usd
+#     drill_fields: [detail*]
+#   }
 
   measure: avg_order_value  {
     type: number
-    sql: ${order_total} / nullif(${order_count},0) ;;
+    sql: ${total_price} / nullif(${order_count},0) ;;
     value_format_name: usd
   }
 
@@ -86,17 +115,18 @@ view: order_product_bridge {
   }
 
   measure: total_discount {
+    description: "Only works at order level.  Do not use with "
     type: sum
     sql: ${quantity} * ${discount_per_bottle} ;;
   }
 
   measure: spend_per_user  {
     type: number
-    sql: (${order_total} - ${total_discount})/nullif(${orders_bridge.distinct_buyers},0);;
+    sql: (${total_price})/nullif(${orders_bridge.distinct_buyers},0);;
     value_format_name: usd
   }
 
   set: detail {
-    fields: [id,order_id, source, price_per_bottle,quantity,products_bridge.name, products_bridge.category, products_bridge.brand,products_bridge.size, count, order_total]
+    fields: [id,order_id, source, price_per_bottle,quantity,products_bridge.name, products_bridge.category, products_bridge.brand,products_bridge.size, count, total_price]
   }
 }
