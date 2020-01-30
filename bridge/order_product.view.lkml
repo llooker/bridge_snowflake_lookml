@@ -23,6 +23,7 @@ view: order_product_bridge {
   }
 
   dimension: pk_id {
+    hidden: yes
     type: string
     primary_key: yes
     sql: ${source} || ${id} ;;
@@ -30,6 +31,7 @@ view: order_product_bridge {
   dimension: order_id {}
 
   dimension: source_order_id {
+    hidden: yes
     type: string
     sql: ${source} || ${order_id} ;;
   }
@@ -37,19 +39,24 @@ view: order_product_bridge {
   dimension: bottle_id {}
 
   dimension: source_bottle_id {
+    hidden: yes
     type: string
     sql: ${source} || ${bottle_id} ;;
   }
 
   dimension: price_per_bottle {
+    hidden: yes
     type: number
   }
 
   dimension: quantity {
+    hidden: yes
+    label: "Line Item Quantity"
     type: number
   }
 
   dimension: discount_per_bottle {
+    hidden: yes
     type: number
   }
 
@@ -58,21 +65,25 @@ view: order_product_bridge {
   }
 
   dimension: order_list_price {
+    hidden: yes
     type: number
     value_format_name: usd
   }
 
   dimension: line_item_list_price {
+    hidden: yes
     type: number
     value_format_name: usd
     sql: ${price_per_bottle} * ${quantity} ;;
   }
   dimension: percent_of_order {
+    hidden: yes
     type: number
     sql: ${line_item_list_price} / ${order_list_price} ;;
     value_format_name: percent_2
   }
   dimension: line_item_actual_price {
+    hidden: yes
     type: number
     sql: ${orders_bridge.total_price_raw}*${percent_of_order} ;;
   }
@@ -102,22 +113,29 @@ view: order_product_bridge {
 #     drill_fields: [detail*]
 #   }
 
-  measure: avg_order_value  {
+  measure: average_order_value  {
     type: number
     sql: ${total_price} / nullif(${order_count},0) ;;
     value_format_name: usd
   }
 
-  measure: avg_basket_size {
+  measure: average_basket_size {
+    description: "NOT SURE THIS IS CORRECT!!  Takes an average of the line item quantity, without regard to bottle size"
     type: number
     sql: AVG(${quantity}) ;;
     value_format_name: decimal_0
   }
 
+dimension: order_total_discount {
+  hidden: yes
+  description: "Only works at order level.  Do not use when grouping on line item or product"
+  type: number
+  sql: ${quantity} * ${discount_per_bottle} ;;
+}
+
   measure: total_discount {
-    description: "Only works at order level.  Do not use with "
     type: sum
-    sql: ${quantity} * ${discount_per_bottle} ;;
+    sql: ${order_total_discount}*${percent_of_order} ;;
   }
 
   measure: spend_per_user  {
