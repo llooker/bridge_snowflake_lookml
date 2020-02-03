@@ -70,6 +70,7 @@ view: orders_bridge {
     type: number
     value_format_name: usd
   }
+  dimension: payment_method {}
   measure: total_price {
     description: "DO NOT USE!  This breaks as soon as the query is grouped by line item or product"
     hidden: yes

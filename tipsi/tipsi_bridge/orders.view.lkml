@@ -16,6 +16,9 @@ view: orders_tipsi_bridge {
       column: total_price {}
       column: status {field: orders_tipsi.order_status}
       column: actual_order_price {}
+      derived_column: payment_method {
+        sql: '' ;;
+      }
     }
   }
   dimension: id {

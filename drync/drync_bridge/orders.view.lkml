@@ -16,6 +16,7 @@ view: orders_drync_bridge {
       column: total_price {}
       column: status {field: orders_drync.status}
       column: actual_order_price {}
+      column: payment_method {field:payments.credit_card_source}
 #       column: sub_total {}
 #       column: deposit {}
 #       column: tax {}
