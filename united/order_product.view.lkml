@@ -87,6 +87,13 @@ view: order_product_bridge {
     type: number
     sql: ${orders_bridge.total_price_raw}*${percent_of_order} ;;
   }
+  dimension: fulfillment_method {
+    sql: case when ${TABLE}.fulfillment_method = 'delivery' then 'Delivery'
+    when ${TABLE}.fulfillment_method = 'shipping' then 'Shipping'
+    when ${TABLE}.fulfillment_method = 'pickup' then 'Pickup'
+    else ${TABLE}.fulfillment_method end
+    ;;
+  }
   measure: total_price {
     value_format_name: usd
     type: sum

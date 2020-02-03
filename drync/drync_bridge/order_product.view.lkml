@@ -7,6 +7,7 @@ view: order_product_drync_bridge {
       column: price_per_bottle {}
       column: quantity {}
       column: discount_per_bottle {}
+      column: fulfillment_method {field: shipments.fulfillment_method}
       derived_column: source {
         sql: 'drync' ;;
       }

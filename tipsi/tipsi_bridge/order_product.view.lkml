@@ -11,6 +11,9 @@ view: order_product_tipsi_bridge {
         column: price_per_bottle {}
         column: quantity {}
         column: discount_per_bottle {}
+        derived_column: fulfillment_method {
+          sql: '' ;;
+        }
         derived_column: source {
           sql: 'tipsi' ;;
         }
