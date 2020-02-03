@@ -4,7 +4,7 @@ view: fulfillers_tipsi_bridge {
       column: fulfiller_id {field:retail_retailgroup.id}
       column: fulfiller_name {field:retail_retailgroup.name}
       derived_column: organization_id {
-        sql: '' ;;
+        sql: 0 ;;
       }
       derived_column: organization_name {
         sql: '' ;;

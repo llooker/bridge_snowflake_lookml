@@ -88,7 +88,12 @@ explore: order_product_bridge {
     sql_on: ${users.source_id} = ${attributes_extended.id} ;;
     relationship: many_to_one
   }
-  join: fulfillers_bridge {}
+  join: fulfillers_bridge {
+    type: inner
+    sql_on: ${orders_bridge.store_id} = ${fulfillers_bridge.fulfiller_id}
+    and ${order_product_bridge.source} = ${fulfillers_bridge.source};;
+    relationship: many_to_one
+  }
 }
 
 explore: attributes {
