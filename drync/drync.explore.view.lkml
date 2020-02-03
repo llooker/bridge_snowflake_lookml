@@ -107,6 +107,26 @@ explore: users_drync {
   }
 }
 
+# explore: organizations {
+#   from: organizations_drync
+#   join: fulfillers {
+#     type: inner
+#     sql_on: ${organizations.id} = ${fulfillers.organization_id};;
+#     relationship: one_to_many
+#   }
+# }
+
+explore: fulfillers_drync {
+  group_label: "Drync"
+  from: fulfillers
+  view_name: fulfillers
+  join: organizations {
+    from: organizations_drync
+    type: inner
+    sql_on: ${fulfillers.organization_id}=${organizations.id} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: orders_drync {
   group_label: "Drync"

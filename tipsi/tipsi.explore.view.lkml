@@ -162,6 +162,10 @@ explore: products_tipsi {
   group_label: "Tipsi"
 }
 
+explore: retail_retailgroup {
+  group_label: "Tipsi"
+}
+
 explore: order_products_tipsi {
   from: order_orderproduct
   group_label: "Tipsi"

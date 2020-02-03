@@ -8,6 +8,8 @@ include: "../affinity/affinity_analysis.view"
 include: "../affinity/item_affinity_analysis.dashboard"
 
 explore: users {
+  group_label: "⭐ United"
+  description: "Start here to analyze purchasing history from Drync, Tipsi, and Bridge"
   join: attributes {
     type: inner
     sql_on: ${users.source_id} = ${attributes.id} ;;
@@ -36,17 +38,20 @@ explore: users {
 }
 
 explore: products_bridge {
+  group_label: "⭐ United"
   label: "Products"
 }
 
 explore: orders_bridge {
+  group_label: "⭐ United"
   label: "Orders"
   sql_always_where: (${orders_bridge.status} NOT IN  ('cancelled','declined') OR ${orders_bridge.id} IS NULL)  ;;
 
 }
 
 explore: order_product_bridge {
-  label: "Order Items"
+  group_label: "⭐ United"
+  label: " 💰Order Items"
   sql_always_where: (${orders_bridge.status} NOT IN  ('cancelled','declined') OR ${orders_bridge.id} IS NULL)  ;;
   join: products_bridge {
     type: left_outer
@@ -83,12 +88,13 @@ explore: order_product_bridge {
     sql_on: ${users.source_id} = ${attributes_extended.id} ;;
     relationship: many_to_one
   }
+  join: fulfillers_bridge {}
 }
 
 explore: attributes {
-
+  group_label: "⭐ United"
 }
 
-explore: attributes_extended {}
+explore: attributes_extended {group_label: "⭐ United"}
 
-explore: devices_bridge {}
+explore: devices_bridge {group_label: "⭐ United"}
