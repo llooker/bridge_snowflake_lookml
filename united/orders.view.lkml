@@ -70,7 +70,15 @@ view: orders_bridge {
     type: number
     value_format_name: usd
   }
-  dimension: payment_method {}
+  dimension: payment_method {
+    sql: case when ${TABLE}.payment_method = 'android_pay' then 'Google Pay'
+    when ${TABLE}.payment_method = 'apple_pay' then 'Apple Pay'
+    when ${TABLE}.payment_method = 'card_io' then 'Card IO'
+    when ${TABLE}.payment_method = 'google_instant_buy' then 'Google Instant Buy'
+    when ${TABLE}.payment_method = 'stored' then 'Stored'
+    when ${TABLE}.payment_method = 'typed' then 'Typed'
+    else ${TABLE}.payment_method end;;
+  }
   measure: total_price {
     description: "DO NOT USE!  This breaks as soon as the query is grouped by line item or product"
     hidden: yes

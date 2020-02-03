@@ -69,7 +69,9 @@ explore: order_product_bridge {
   }
   join: orders_bridge {
     type: left_outer
-    sql_on: ${order_product_bridge.source_order_id} = ${orders_bridge.source_id} ;;
+    sql_on: ${order_product_bridge.order_id} = ${orders_bridge.id}
+        and ${order_product_bridge.source} = ${orders_bridge.source};;
+
     relationship: many_to_one
   }
   join: users {
