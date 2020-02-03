@@ -1,4 +1,4 @@
-include: "../../bridge/users.view"
+include: "../../united/users.view"
 
 view: users_drync_bridge {
   extends: [users_fields]

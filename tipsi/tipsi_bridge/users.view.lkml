@@ -1,4 +1,4 @@
-include: "../../bridge/users.view"
+include: "../../united/users.view"
 
 view: users_tipsi_bridge {
   extends: [users_fields]

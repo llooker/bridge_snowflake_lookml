@@ -4,7 +4,7 @@
   elements:
   - title: Product Segmentation
     name: Product Segmentation
-    model: bridge
+    model: united
     explore: order_purchase_affinity
     type: looker_scatter
     fields: [order_purchase_affinity.product_a_average_rest_of_basket_margin, order_purchase_affinity.product_a_order_frequency,
@@ -422,7 +422,7 @@
     default_value: prod^_name
     allow_multiple_values: true
     required: false
-    model: bridge
+    model: united
     explore: order_purchase_affinity
     listens_to_filters: []
     field: order_items_base.product_level
