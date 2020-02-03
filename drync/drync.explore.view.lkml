@@ -41,6 +41,13 @@ explore: product_clicked_drync {
     sql_on: ${users_drync.id} = ${orders.user_id} ;;
     relationship: one_to_many
   }
+
+  join: payments {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${orders.id} = ${payments.order_id} ;;
+
+  }
 }
 
 explore: users_drync {
@@ -74,6 +81,13 @@ explore: users_drync {
     type: left_outer
     sql_on: ${users_drync.id} = ${orders.user_id} ;;
     relationship: one_to_many
+  }
+
+  join: payments {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${orders.id} = ${payments.order_id} ;;
+
   }
 
   join: shipments {
@@ -132,11 +146,10 @@ explore: orders_drync {
   from: orders_drync
   group_label: "Drync"
   join: payments {
-    from: payments_drync
     type: left_outer
     relationship: many_to_one
     sql_on: ${orders_drync.id} = ${payments.order_id} ;;
-  }
+    }
 }
 
 explore: products_drync {
@@ -160,11 +173,12 @@ explore: line_items {
     sql_on: ${shipments.order_id} = ${orders.id} ;;
     relationship: one_to_many
   }
+
   join: payments {
-    from: payments_drync
     type: left_outer
     relationship: many_to_one
     sql_on: ${orders.id} = ${payments.order_id} ;;
+
   }
   join: order_percentage {
     type: inner
