@@ -3,12 +3,6 @@ view: orders_drync_bridge {
     explore_source: orders_drync {
       column: id {}
       column: created_time { field: orders_drync.created_time }
-      derived_column: gift_recipient {
-        sql: null ;;
-      }
-      derived_column: source {
-        sql: 'drync' ;;
-      }
       column: quantity {}
       column: store_id { field: orders_drync.shopping_fulfiller_id }
       column: user_id {}
@@ -17,6 +11,15 @@ view: orders_drync_bridge {
       column: status {field: orders_drync.status}
       column: actual_order_price {}
       column: payment_method {field:payments.credit_card_source}
+      column: subtotal {field:orders_drync.sub_total}
+      column: deposit {}
+      column: tax {}
+      derived_column: gift_recipient {
+        sql: null ;;
+      }
+      derived_column: source {
+        sql: 'drync' ;;
+      }
 #       column: sub_total {}
 #       column: deposit {}
 #       column: tax {}

@@ -3,12 +3,6 @@ view: orders_tipsi_bridge {
     explore_source: orders_tipsi {
       column: id {}
       column: created_time { field: orders_tipsi.created_time }
-      derived_column: gift_recipient {
-        sql: null ;;
-      }
-      derived_column: source {
-        sql: 'tipsi' ;;
-      }
       column: quantity { field: orders_tipsi.total_count }
       column: store_id {}
       column: user_id {}
@@ -18,6 +12,15 @@ view: orders_tipsi_bridge {
       column: actual_order_price {}
       derived_column: payment_method {
         sql: '' ;;
+      }
+      derived_column: subtotal {sql: null ;;}
+      derived_column: deposit {sql: null ;;}
+      derived_column: tax {sql: null ;;}
+      derived_column: gift_recipient {
+        sql: null ;;
+      }
+      derived_column: source {
+        sql: 'tipsi' ;;
       }
     }
   }

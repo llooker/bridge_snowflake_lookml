@@ -25,6 +25,7 @@ view: orders_bridge {
 
 
   dimension_group: created {
+    label: "Order Created"
     type: time
     timeframes: [
       raw,
@@ -38,6 +39,22 @@ view: orders_bridge {
       year
     ]
   sql: ${TABLE}.created_time ;;
+  }
+  filter: date_range_filter {
+#     hidden: yes
+    type: date
+  }
+  dimension_group: until_end_of_date_range_filter {
+    description: "Do not use this with anything besides timeframe week"
+    type: duration
+    timeframes: [week]
+    sql_start: ${created_week}  ;; #do not use this with anything besides timeframe week
+    sql_end: {% date_end date_range_filter %} ;;
+
+  }
+  dimension: date_end_of_range_back_12_weeks {
+    type: yesno
+    sql: ${weeks_until_end_of_date_range_filter}>0 and ${weeks_until_end_of_date_range_filter}<=12 ;;
   }
   dimension: gift_recipient {
     type: string
@@ -58,7 +75,6 @@ view: orders_bridge {
   dimension: status {
     type: string
   }
-#   dimension: discount {}
   dimension: total_price_raw {
     label: "Total Price"
     type: number
@@ -78,6 +94,22 @@ view: orders_bridge {
     when ${TABLE}.payment_method = 'stored' then 'Stored'
     when ${TABLE}.payment_method = 'typed' then 'Typed'
     else ${TABLE}.payment_method end;;
+  }
+  dimension: subtotal {
+    type:number
+    hidden:yes
+  }
+  dimension: deposit {
+    type:number
+    hidden:yes
+  }
+  dimension: tax {
+    type:number
+    hidden:yes
+  }
+  dimension: discount {
+    type:number
+    hidden:yes
   }
   measure: total_price {
     description: "DO NOT USE!  This breaks as soon as the query is grouped by line item or product"

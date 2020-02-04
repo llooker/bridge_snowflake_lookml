@@ -87,6 +87,27 @@ view: order_product_bridge {
     type: number
     sql: ${orders_bridge.total_price_raw}*${percent_of_order} ;;
   }
+  measure: total_subtotal {
+    label: "Subtotal"
+    type: sum
+    sql: ${orders_bridge.subtotal}*${percent_of_order} ;;
+    value_format_name: usd
+  }
+  measure: total_tax {
+    type: sum
+    sql: ${orders_bridge.tax}*${percent_of_order} ;;
+    value_format_name: usd
+  }
+  measure: total_deposit {
+    type: sum
+    sql: ${orders_bridge.tax}*${percent_of_order} ;;
+    value_format_name: usd
+  }
+  measure: total_discount {
+    type: sum
+    sql: ${orders_bridge.discount}*${percent_of_order} ;;
+    value_format_name: usd
+  }
   dimension: fulfillment_method {
     sql: case when ${TABLE}.fulfillment_method = 'delivery' then 'Delivery'
     when ${TABLE}.fulfillment_method = 'shipping' then 'Shipping'
@@ -140,9 +161,10 @@ dimension: order_total_discount {
   sql: ${quantity} * ${discount_per_bottle} ;;
 }
 
-  measure: total_discount {
+  measure: total_discount_2 {
     type: sum
     sql: ${order_total_discount}*${percent_of_order} ;;
+    value_format_name: usd
   }
 
   measure: spend_per_user  {

@@ -88,10 +88,12 @@ view: orders_drync {
   dimension: discount {
     type: number
     sql: ${TABLE}.discount / 100.0 ;;
+  #  + ${discount_adjustment} ;;
     value_format_name: usd
   }
 
   dimension: discount_adjustment {
+    hidden: yes
     type: number
     sql: ${TABLE}.discount_adjustment /100.0;;
   }
