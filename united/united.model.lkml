@@ -42,12 +42,12 @@ explore: products_bridge {
   label: "Products"
 }
 
-explore: orders_bridge {
-  group_label: "⭐ United"
-  label: "Orders"
-  sql_always_where: (${orders_bridge.status} NOT IN  ('cancelled','declined') OR ${orders_bridge.id} IS NULL)  ;;
-
-}
+# explore: orders_bridge {
+#   group_label: "⭐ United"
+#   label: "Orders"
+#   sql_always_where: (${orders_bridge.status} NOT IN  ('cancelled','declined') OR ${orders_bridge.id} IS NULL)  ;;
+#
+# }
 
 explore: order_product_bridge {
   group_label: "⭐ United"

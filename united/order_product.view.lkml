@@ -87,25 +87,55 @@ view: order_product_bridge {
     type: number
     sql: ${orders_bridge.total_price_raw}*${percent_of_order} ;;
   }
-  measure: total_subtotal {
-    label: "Subtotal"
-    type: sum
+  dimension: line_item_subtotal {
+    hidden: yes
+    type: number
     sql: ${orders_bridge.subtotal}*${percent_of_order} ;;
+  }
+  measure: total_subtotal {
+    label: "Product Total"
+    type: sum
+    sql: ${line_item_subtotal} ;;
     value_format_name: usd
+  }
+  dimension: line_item_tax {
+    hidden: yes
+    type: number
+    sql:${orders_bridge.tax}*${percent_of_order} ;;
   }
   measure: total_tax {
     type: sum
-    sql: ${orders_bridge.tax}*${percent_of_order} ;;
+    sql:  ${line_item_tax} ;;
     value_format_name: usd
+  }
+  dimension: line_item_deposit {
+    hidden: yes
+    type: number
+    sql: ${orders_bridge.deposit}*${percent_of_order} ;;
   }
   measure: total_deposit {
     type: sum
-    sql: ${orders_bridge.tax}*${percent_of_order} ;;
+    sql: ${line_item_deposit} ;;
     value_format_name: usd
+  }
+  dimension: line_item_discount {
+    hidden: yes
+    type: number
+    sql: ${orders_bridge.discount}*${percent_of_order} ;;
   }
   measure: total_discount {
     type: sum
-    sql: ${orders_bridge.discount}*${percent_of_order} ;;
+    sql: ${line_item_discount} ;;
+    value_format_name: usd
+  }
+  dimension: line_item_net {
+    type: number
+    hidden: yes
+    sql: (${line_item_subtotal} - ${line_item_discount} + ${line_item_deposit}) ;;
+  }
+  measure: net_total {
+    type: sum
+    sql: ${line_item_net} ;;
     value_format_name: usd
   }
   dimension: fulfillment_method {
@@ -116,6 +146,7 @@ view: order_product_bridge {
     ;;
   }
   measure: total_price {
+    description: "Includes deposit, tax, discounts, shipping, delivery tip, and product costs"
     value_format_name: usd
     type: sum
     sql: ${line_item_actual_price} ;;

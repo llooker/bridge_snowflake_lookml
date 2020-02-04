@@ -1,5 +1,5 @@
 view: orders_drync {
-   sql_table_name: marketing.public.orders ;;
+   sql_table_name: production.production.orders ;;
 
   dimension: id {
     primary_key: yes
@@ -87,8 +87,7 @@ view: orders_drync {
 
   dimension: discount {
     type: number
-    sql: ${TABLE}.discount / 100.0 ;;
-  #  + ${discount_adjustment} ;;
+    sql: ${TABLE}.discount / 100.0  + ${discount_adjustment} ;;
     value_format_name: usd
   }
 
