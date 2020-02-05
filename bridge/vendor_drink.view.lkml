@@ -85,9 +85,33 @@ view: vendor_drink {
     sql: ${TABLE}."DESCRIPTION" ;;
   }
 
-  dimension: drink_type {
+  dimension: drink_type_raw {
     type: number
+    hidden: yes
     sql: ${TABLE}."DRINK_TYPE" ;;
+  }
+
+  dimension: drink_type {
+    type: string
+    case: {
+      when: {
+        label: "Other"
+        sql: ${drink_type_raw} = 0 ;;
+      }
+      when: {
+        label: "Beer"
+        sql: ${drink_type_raw} = 1 ;;
+      }
+      when: {
+        label: "Spirit"
+        sql: ${drink_type_raw} = 2 ;;
+      }
+      when: {
+        label: "Cocktail"
+        sql: ${drink_type_raw} = 3 ;;
+      }
+      else: "Other"
+    }
   }
 
   dimension: label_url {

@@ -81,9 +81,10 @@ view: core_restaurant {
     sql: ${TABLE}."COMMENT" ;;
   }
 
-  dimension: country {
+  # improperly labeled in db as country
+  dimension: state {
     type: string
-    map_layer_name: countries
+    map_layer_name: us_states
     sql: ${TABLE}."COUNTRY" ;;
   }
 
@@ -139,6 +140,7 @@ view: core_restaurant {
 
   dimension: postcode {
     type: string
+    map_layer_name: us_zipcode_tabulation_areas
     sql: ${TABLE}."POSTCODE" ;;
   }
 
