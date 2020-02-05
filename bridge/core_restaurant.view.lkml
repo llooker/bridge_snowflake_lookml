@@ -1,4 +1,4 @@
-view: core_restaurant {
+view: core_restaurant_bridge {
   sql_table_name: "BRIDGE"."CORE_RESTAURANT"
     ;;
   drill_fields: [id]

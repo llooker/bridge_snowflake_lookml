@@ -1,4 +1,4 @@
-view: api_winetbl {
+view: api_winetbl_bridge {
   sql_table_name: "BRIDGE"."API_WINETBL"
     ;;
   drill_fields: [id]
@@ -66,9 +66,28 @@ view: api_winetbl {
     sql: ${TABLE}."APPELLATION_ID" ;;
   }
 
-  dimension: color {
+  dimension: color_raw {
     type: number
+    hidden: yes
     sql: ${TABLE}."COLOR" ;;
+  }
+
+  dimension: color {
+    type: string
+    case: {
+      when: {
+        label: "White"
+        sql: ${color_raw} = 1 || 2 || 3 ;;
+      }
+      when: {
+        label: "Rose"
+        sql: ${color_raw} = 4 ;;
+      }
+      when: {
+        label: "Red"
+        sql: ${color_raw} = 5 || 6 || 7 ;;
+      }
+    }
   }
 
   dimension: country_id {
@@ -184,9 +203,36 @@ view: api_winetbl {
     sql: ${TABLE}."TINEYE_UPLOAD_DATE" ;;
   }
 
-  dimension: type {
+  dimension: type_raw {
     type: number
+    hidden: yes
     sql: ${TABLE}."TYPE" ;;
+  }
+
+  dimension: type {
+    type: string
+    case: {
+      when: {
+        label: "Regular"
+        sql: ${type_raw} = 0 ;;
+      }
+      when: {
+        label: "Fortified"
+        sql: ${type_raw} = 1 ;;
+      }
+      when: {
+        label: "Sparkling"
+        sql: ${type_raw} = 2 ;;
+      }
+      when: {
+        label: "Dessert"
+        sql: ${type_raw} = 3 ;;
+      }
+      when: {
+        label: "Off-Dry"
+        sql: ${type_raw} = 4 ;;
+      }
+    }
   }
 
   dimension_group: updated {
@@ -260,6 +306,6 @@ view: api_winetbl {
 
   measure: count {
     type: count
-    drill_fields: [id, custom_name, name]
+    drill_fields: [id, custom_name, name, color, type]
   }
 }

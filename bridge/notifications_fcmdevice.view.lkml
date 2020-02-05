@@ -1,13 +1,6 @@
-view: vendor_drinkproducer_bridge {
-  sql_table_name: "BRIDGE"."VENDOR_DRINKPRODUCER"
+view: notifications_fcmdevice_bridge {
+  sql_table_name: "BRIDGE"."NOTIFICATIONS_FCMDEVICE"
     ;;
-  drill_fields: [id]
-
-  dimension: id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}."ID" ;;
-  }
 
   dimension_group: _sdc_batched {
     type: time
@@ -61,28 +54,38 @@ view: vendor_drinkproducer_bridge {
     sql: ${TABLE}."_SDC_TABLE_VERSION" ;;
   }
 
-  dimension: description {
+  dimension: device_id {
     type: string
-    sql: ${TABLE}."DESCRIPTION" ;;
+    sql: ${TABLE}."DEVICE_ID" ;;
   }
 
-  dimension: drink_type {
-    type: number
-    sql: ${TABLE}."DRINK_TYPE" ;;
-  }
-
-  dimension: name {
-    type: string
-    sql: ${TABLE}."NAME" ;;
-  }
-
-  dimension: validated {
+  dimension: enabled {
     type: yesno
-    sql: ${TABLE}."VALIDATED" ;;
+    sql: ${TABLE}."ENABLED" ;;
+  }
+
+  dimension: group_id {
+    type: number
+    sql: ${TABLE}."GROUP_ID" ;;
+  }
+
+  dimension: token {
+    type: string
+    sql: ${TABLE}."TOKEN" ;;
+  }
+
+  dimension: type {
+    type: number
+    sql: ${TABLE}."TYPE" ;;
+  }
+
+  dimension: user_id {
+    type: number
+    sql: ${TABLE}."USER_ID" ;;
   }
 
   measure: count {
     type: count
-    drill_fields: [id, name]
+    drill_fields: []
   }
 }

@@ -1,69 +1,90 @@
-view: bridge {
-  # # You can specify the table name if it's different from the view name:
-  # sql_table_name: my_schema_name.tester ;;
-  #
-  # # Define your dimensions and measures here, like this:
-  # dimension: user_id {
-  #   description: "Unique ID for each user that has ordered"
-  #   type: number
-  #   sql: ${TABLE}.user_id ;;
-  # }
-  #
-  # dimension: lifetime_orders {
-  #   description: "The total number of orders for each user"
-  #   type: number
-  #   sql: ${TABLE}.lifetime_orders ;;
-  # }
-  #
-  # dimension_group: most_recent_purchase {
-  #   description: "The date when each user last ordered"
-  #   type: time
-  #   timeframes: [date, week, month, year]
-  #   sql: ${TABLE}.most_recent_purchase_at ;;
-  # }
-  #
-  # measure: total_lifetime_orders {
-  #   description: "Use this for counting lifetime orders across many users"
-  #   type: sum
-  #   sql: ${lifetime_orders} ;;
-  # }
+include: "*.view.lkml"
+include: "./derived_views/*.view.lkml"
+
+explore: products_bridge {
+  from: retail_retailinventory_bridge
+  group_label: "Bridge"
+  join: api_winetbl {
+    from: api_winetbl_bridge
+    type: left_outer
+    sql_on: ${products_bridge.wine_id} = ${api_winetbl.id} ;;
+    relationship: many_to_one
+  }
+  join: vendor_drink {
+    from: vendor_drink_bridge
+    type: left_outer
+    sql_on: ${products_bridge.drink_id} = ${vendor_drink.id} ;;
+    relationship: many_to_one
+  }
+  join: vendor_drinkproducer {
+    from: vendor_drinkproducer_bridge
+    type: left_outer
+    sql_on: ${vendor_drink.producer_id} = ${vendor_drinkproducer.id} ;;
+    relationship: many_to_one
+  }
+  join: vendor_drinktag {
+    from: vendor_drinktag_bridge
+    type: left_outer
+    sql_on: ${vendor_drink.tag_id} = ${vendor_drinktag.id} ;;
+    relationship: many_to_one
+  }
+#   join: vendor_drinkinventory {
+#     type: left_outer
+#     sql_on: ${vendor_drink.id} = ${vendor_drinkinventory.drink_id} ;;
+#     relationship: one_to_many
+#   }
 }
 
-# view: bridge {
-#   # Or, you could make this view a derived table, like this:
-#   derived_table: {
-#     sql: SELECT
-#         user_id as user_id
-#         , COUNT(*) as lifetime_orders
-#         , MAX(orders.created_at) as most_recent_purchase_at
-#       FROM orders
-#       GROUP BY user_id
-#       ;;
+explore: users_bridge {
+  from: tipsi_auth_user_bridge
+  group_label: "Bridge"
+  join: devices {
+    from: notifications_fcmdevice_bridge
+    view_label: "Devices"
+    type: inner
+    sql_on: ${users_bridge.id} = ${devices.user_id} ;;
+    relationship: many_to_one
+  }
+#   join: order_order {
+#     view_label: "Orders"
+#     type: left_outer
+#     sql_on: ${users_tipsi.id} = ${order_order.user_id} ;;
+#     relationship: one_to_many
 #   }
-#
-#   # Define your dimensions and measures here, like this:
-#   dimension: user_id {
-#     description: "Unique ID for each user that has ordered"
-#     type: number
-#     sql: ${TABLE}.user_id ;;
+#   join: order_orderproduct {
+#     view_label: "Order Product"
+#     type: left_outer
+#     sql_on: ${order_order.id} = ${order_orderproduct.order_id} ;;
+#     relationship: many_to_one
 #   }
-#
-#   dimension: lifetime_orders {
-#     description: "The total number of orders for each user"
-#     type: number
-#     sql: ${TABLE}.lifetime_orders ;;
+#   join: vendor_drink {
+#     view_label: "Drinks"
+#     type: left_outer
+#     sql_on: ${order_orderproduct.drink_id} = ${vendor_drink.id} ;;
+#     relationship: many_to_one
 #   }
-#
-#   dimension_group: most_recent_purchase {
-#     description: "The date when each user last ordered"
-#     type: time
-#     timeframes: [date, week, month, year]
-#     sql: ${TABLE}.most_recent_purchase_at ;;
+#   join: vendor_drinkproducer {
+#     view_label: "Drink Producer"
+#     type: left_outer
+#     sql_on: ${vendor_drink.producer_id} = ${vendor_drinkproducer.id} ;;
+#     relationship: many_to_one
 #   }
-#
-#   measure: total_lifetime_orders {
-#     description: "Use this for counting lifetime orders across many users"
-#     type: sum
-#     sql: ${lifetime_orders} ;;
+#   join: vendor_drinktag {
+#     view_label: "Drink Tag"
+#     type: left_outer
+#     sql_on: ${vendor_drink.tag_id} = ${vendor_drinktag.id} ;;
+#     relationship: many_to_one
 #   }
-# }
+#   join: vendor_drinkinventory {
+#     view_label: "Drink Inventory"
+#     type: left_outer
+#     sql_on: ${vendor_drink.id} = ${vendor_drinkinventory.drink_id} ;;
+#     relationship: one_to_many
+#   }
+#   join: api_winetbl {
+#     view_label: "Wines"
+#     type: left_outer
+#     sql_on: ${order_orderproduct.wine_id} = ${api_winetbl.id} ;;
+#     relationship: many_to_one
+#   }
+}

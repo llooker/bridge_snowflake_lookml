@@ -1,4 +1,4 @@
-view: tipsi_auth_user {
+view: tipsi_auth_user_bridge {
   sql_table_name: "BRIDGE"."TIPSI_AUTH_USER"
     ;;
   drill_fields: [id]

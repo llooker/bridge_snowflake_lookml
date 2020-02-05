@@ -1,4 +1,4 @@
-view: vendor_drinktag {
+view: vendor_drinktag_bridge {
   sql_table_name: "BRIDGE"."VENDOR_DRINKTAG"
     ;;
   drill_fields: [id]

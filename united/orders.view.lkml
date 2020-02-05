@@ -4,7 +4,7 @@ include: "../tipsi/tipsi_bridge/orders.view.lkml"
 
 
 
-view: orders_bridge {
+view: orders_united {
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:  SELECT * FROM ${orders_drync_bridge.SQL_TABLE_NAME}

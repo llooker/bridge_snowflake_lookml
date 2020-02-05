@@ -1,4 +1,4 @@
-view: retail_store {
+view: retail_store_bridge {
   sql_table_name: "BRIDGE"."RETAIL_STORE"
     ;;
 

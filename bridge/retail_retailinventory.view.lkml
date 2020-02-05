@@ -1,4 +1,4 @@
-view: retail_retailinventory {
+view: retail_retailinventory_bridge {
   sql_table_name: "BRIDGE"."RETAIL_RETAILINVENTORY"
     ;;
   drill_fields: [id]

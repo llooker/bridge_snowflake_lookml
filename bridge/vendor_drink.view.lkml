@@ -1,4 +1,4 @@
-view: vendor_drink {
+view: vendor_drink_bridge {
   sql_table_name: "BRIDGE"."VENDOR_DRINK"
     ;;
   drill_fields: [id]
@@ -165,6 +165,6 @@ view: vendor_drink {
 
   measure: count {
     type: count
-    drill_fields: [id, name]
+    drill_fields: [id, name, description, drink_type]
   }
 }

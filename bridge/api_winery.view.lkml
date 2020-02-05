@@ -1,4 +1,4 @@
-view: api_winery {
+view: api_winery_bridge {
   sql_table_name: "BRIDGE"."API_WINERY"
     ;;
   drill_fields: [id]

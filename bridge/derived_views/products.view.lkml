@@ -1,4 +1,4 @@
-view: products_tipsi {
+view: products_bridge {
   derived_table: {
     sql: select r.id, w.id  as product_id, 'wine' as drink_or_wine, w.name as name, r.in_stock as quantity, r.unit_size as size, 4 as category, v.name as style, brand.name as brand
            from production.bridge.retail_retailinventory r

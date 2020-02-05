@@ -3,6 +3,7 @@ connection: "warehouse2"
 include: "*.view.lkml"
 include: "../tipsi/tipsi.explore.view"
 include: "../drync/drync.explore.view"
+include: "../bridge/bridge.explore.view"
 include: "../throtle/*.view"
 include: "../affinity/affinity_analysis.view"
 include: "../affinity/item_affinity_analysis.dashboard"
@@ -20,64 +21,64 @@ explore: users {
     sql_on: ${users.source_id} = ${attributes_extended.id} ;;
     relationship: one_to_many
   }
-  join: orders_bridge {
+  join: orders_united {
     type: left_outer
-    sql_on: ${users.source_id} = ${orders_bridge.source_user_id} ;;
+    sql_on: ${users.source_id} = ${orders_united.source_user_id} ;;
     relationship: many_to_many
   }
-  join: order_product_bridge {
+  join: order_product_united {
     type: left_outer
-    sql_on: ${orders_bridge.source_id} = ${order_product_bridge.source_order_id} ;; #need to use a product id in left table to join
+    sql_on: ${orders_united.source_id} = ${order_product_united.source_order_id} ;; #need to use a product id in left table to join
     relationship: one_to_many
   }
-  join: products_bridge {
+  join: products_united {
     type: left_outer
-    sql_on: ${order_product_bridge.source_bottle_id} = ${products_bridge.source_product_id} ;;
+    sql_on: ${order_product_united.source_bottle_id} = ${products_united.source_product_id} ;;
     relationship: one_to_many
   }
 }
 
-explore: products_bridge {
+explore: products_united {
   group_label: "⭐ United"
   label: "Products"
 }
 
-# explore: orders_bridge {
+# explore: orders_united {
 #   group_label: "⭐ United"
 #   label: "Orders"
-#   sql_always_where: (${orders_bridge.status} NOT IN  ('cancelled','declined') OR ${orders_bridge.id} IS NULL)  ;;
+#   sql_always_where: (${orders_united.status} NOT IN  ('cancelled','declined') OR ${orders_united.id} IS NULL)  ;;
 #
 # }
 
-explore: order_product_bridge {
+explore: order_product_united {
   group_label: "⭐ United"
   label: " 💰Order Items"
-  sql_always_where: (${orders_bridge.status} NOT IN  ('cancelled','declined') OR ${orders_bridge.id} IS NULL)  ;;
-  join: products_bridge {
+  sql_always_where: (${orders_united.status} NOT IN  ('cancelled','declined') OR ${orders_united.id} IS NULL)  ;;
+  join: products_united {
     type: left_outer
-    sql_on: ${order_product_bridge.bottle_id} =
-    case when order_product_bridge.source = 'drync' then ${products_bridge.id}
-    when order_product_bridge.source = 'tipsi' then ${products_bridge.product_id}
+    sql_on: ${order_product_united.bottle_id} =
+    case when order_product_united.source = 'drync' then ${products_united.id}
+    when order_product_united.source = 'tipsi' then ${products_united.product_id}
     else false end
 
-    AND ${products_bridge.source} =
-    case when ${orders_bridge.source}='drync' then 'drync'
-    when ${orders_bridge.source}='tipsi' then 'tipsi'
+    AND ${products_united.source} =
+    case when ${orders_united.source}='drync' then 'drync'
+    when ${orders_united.source}='tipsi' then 'tipsi'
     else false end
     ;;
-    relationship: many_to_many #in order to change back to many_to_one, need to detect why this is fanning out from 1 to 48: https://dryncapp.looker.com/explore/bridge/order_product_bridge?qid=q6xkKWVQOtVrY59hu9gzU7
+    relationship: many_to_many #in order to change back to many_to_one, need to detect why this is fanning out from 1 to 48: https://dryncapp.looker.com/explore/bridge/order_product_united?qid=q6xkKWVQOtVrY59hu9gzU7
   }
-  join: orders_bridge {
+  join: orders_united {
     type: left_outer
-    sql_on: ${order_product_bridge.order_id} = ${orders_bridge.id}
-        and ${order_product_bridge.source} = ${orders_bridge.source};;
+    sql_on: ${order_product_united.order_id} = ${orders_united.id}
+        and ${order_product_united.source} = ${orders_united.source};;
 
     relationship: many_to_one
   }
   join: users {
     view_label: "Users with Orders"
     type: left_outer
-    sql_on: ${orders_bridge.source_user_id} = ${users.source_id}  ;;
+    sql_on: ${orders_united.source_user_id} = ${users.source_id}  ;;
     relationship: many_to_one
   }
   join: attributes {
@@ -90,10 +91,10 @@ explore: order_product_bridge {
     sql_on: ${users.source_id} = ${attributes_extended.id} ;;
     relationship: many_to_one
   }
-  join: fulfillers_bridge {
+  join: fulfillers_united {
     type: inner
-    sql_on: ${orders_bridge.store_id} = ${fulfillers_bridge.fulfiller_id}
-    and ${order_product_bridge.source} = ${fulfillers_bridge.source};;
+    sql_on: ${orders_united.store_id} = ${fulfillers_united.fulfiller_id}
+    and ${order_product_united.source} = ${fulfillers_united.source};;
     relationship: many_to_one
   }
 }
@@ -104,4 +105,4 @@ explore: attributes {
 
 explore: attributes_extended {group_label: "⭐ United"}
 
-explore: devices_bridge {group_label: "⭐ United"}
+explore: devices_united {group_label: "⭐ United"}

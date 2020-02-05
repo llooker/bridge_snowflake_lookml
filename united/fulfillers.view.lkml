@@ -4,7 +4,7 @@ include: "../tipsi/tipsi_bridge/fulfillers.view.lkml"
 
 
 
-view: fulfillers_bridge {
+view: fulfillers_united {
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT * FROM ${fulfillers_drync_bridge.SQL_TABLE_NAME}

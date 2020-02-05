@@ -1,4 +1,4 @@
-view: api_varietal {
+view: api_varietal_bridge {
   sql_table_name: "BRIDGE"."API_VARIETAL"
     ;;
   drill_fields: [id]

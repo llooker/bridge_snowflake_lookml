@@ -7,7 +7,7 @@ include: "../tipsi/tipsi_bridge/order_product.view.lkml"
 #   from: order
 #   label: "USE ME"
 # }
-view: order_product_bridge {
+view: order_product_united {
   view_label: "Order Items"
   # Or, you could make this view a derived table, like this:
   derived_table: {
@@ -85,12 +85,12 @@ view: order_product_bridge {
   dimension: line_item_actual_price {
     hidden: yes
     type: number
-    sql: ${orders_bridge.total_price_raw}*${percent_of_order} ;;
+    sql: ${orders_united.total_price_raw}*${percent_of_order} ;;
   }
   dimension: line_item_subtotal {
     hidden: yes
     type: number
-    sql: ${orders_bridge.subtotal}*${percent_of_order} ;;
+    sql: ${orders_united.subtotal}*${percent_of_order} ;;
   }
   measure: total_subtotal {
     label: "Product Total"
@@ -101,7 +101,7 @@ view: order_product_bridge {
   dimension: line_item_tax {
     hidden: yes
     type: number
-    sql:${orders_bridge.tax}*${percent_of_order} ;;
+    sql:${orders_united.tax}*${percent_of_order} ;;
   }
   measure: total_tax {
     type: sum
@@ -111,7 +111,7 @@ view: order_product_bridge {
   dimension: line_item_deposit {
     hidden: yes
     type: number
-    sql: ${orders_bridge.deposit}*${percent_of_order} ;;
+    sql: ${orders_united.deposit}*${percent_of_order} ;;
   }
   measure: total_deposit {
     type: sum
@@ -121,7 +121,7 @@ view: order_product_bridge {
   dimension: line_item_discount {
     hidden: yes
     type: number
-    sql: ${orders_bridge.discount}*${percent_of_order} ;;
+    sql: ${orders_united.discount}*${percent_of_order} ;;
   }
   measure: total_discount {
     type: sum
@@ -200,11 +200,11 @@ dimension: order_total_discount {
 
   measure: spend_per_user  {
     type: number
-    sql: (${total_price})/nullif(${orders_bridge.distinct_buyers},0);;
+    sql: (${total_price})/nullif(${orders_united.distinct_buyers},0);;
     value_format_name: usd
   }
 
   set: detail {
-    fields: [id,order_id, source, price_per_bottle,quantity,products_bridge.name, products_bridge.category, products_bridge.brand,products_bridge.size, count, total_price]
+    fields: [id,order_id, source, price_per_bottle,quantity,products_united.name, products_united.category, products_united.brand,products_united.size, count, total_price]
   }
 }

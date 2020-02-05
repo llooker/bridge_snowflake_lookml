@@ -4,7 +4,7 @@ include: "../tipsi/tipsi_bridge/devices.view.lkml"
 
 
 
-view: devices_bridge {
+view: devices_united {
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:   SELECT * FROM ${devices_drync_bridge.SQL_TABLE_NAME}
