@@ -96,6 +96,11 @@ view: retail_retailgroup_bridge {
     sql: ${TABLE}."NAME" ;;
   }
 
+  dimension: short_name {
+    type: string
+    sql: REGEXP_REPLACE(LOWER(${name}), '( & | )', '_') ;;
+  }
+
   dimension: secondary_logo_url {
     type: string
     sql: ${TABLE}."SECONDARY_LOGO_URL" ;;

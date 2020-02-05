@@ -88,3 +88,7 @@ explore: users_bridge {
 #     relationship: many_to_one
 #   }
 }
+
+explore: retail_retailgroup_bridge {
+  group_label: "Bridge"
+}
