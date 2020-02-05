@@ -1,5 +1,5 @@
 include: "../drync/drync_united/order_product.view.lkml"
-include: "../tipsi/tipsi_bridge/order_product.view.lkml"
+include: "../tipsi/tipsi_united/order_product.view.lkml"
 
 
 
@@ -13,7 +13,7 @@ view: order_product_united {
   derived_table: {
     sql:   SELECT * FROM ${order_product_drync_united.SQL_TABLE_NAME}
             UNION
-            SELECT * FROM ${order_product_tipsi_bridge.SQL_TABLE_NAME}
+            SELECT * FROM ${order_product_tipsi_united.SQL_TABLE_NAME}
       ;;
   }
 

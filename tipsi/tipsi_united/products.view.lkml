@@ -1,4 +1,4 @@
-view: products_tipsi_bridge {
+view: products_tipsi_united {
   derived_table: {
     explore_source: products_tipsi {
       column: id {}

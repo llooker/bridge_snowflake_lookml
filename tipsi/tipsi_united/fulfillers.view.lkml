@@ -1,4 +1,4 @@
-view: fulfillers_tipsi_bridge {
+view: fulfillers_tipsi_united {
   derived_table: {
     explore_source: retail_retailgroup {
       column: fulfiller_id {field:retail_retailgroup.id}

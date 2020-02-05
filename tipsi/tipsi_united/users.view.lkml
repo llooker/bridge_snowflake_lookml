@@ -1,6 +1,6 @@
 include: "../../united/users.view"
 
-view: users_tipsi_bridge {
+view: users_tipsi_united {
   extends: [users_fields]
   derived_table: {
     explore_source: users_tipsi {

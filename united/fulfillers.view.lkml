@@ -1,5 +1,5 @@
 include: "../drync/drync_united/fulfillers.view.lkml"
-include: "../tipsi/tipsi_bridge/fulfillers.view.lkml"
+include: "../tipsi/tipsi_united/fulfillers.view.lkml"
 
 
 
@@ -9,7 +9,7 @@ view: fulfillers_united {
   derived_table: {
     sql:   SELECT * FROM ${fulfillers_drync_united.SQL_TABLE_NAME}
             UNION
-            SELECT * FROM ${fulfillers_tipsi_bridge.SQL_TABLE_NAME}
+            SELECT * FROM ${fulfillers_tipsi_united.SQL_TABLE_NAME}
       ;;
   }
 

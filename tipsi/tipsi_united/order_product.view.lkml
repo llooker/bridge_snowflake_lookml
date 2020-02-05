@@ -1,4 +1,4 @@
-view: order_product_tipsi_bridge {
+view: order_product_tipsi_united {
   # If necessary, uncomment the line below to include explore_source.
 
 # include: "tipsi.explore.view.lkml"

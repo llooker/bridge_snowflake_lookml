@@ -1,4 +1,4 @@
-view: devices_tipsi_bridge {
+view: devices_tipsi_united {
   derived_table: {
     explore_source: devices_tipsi {
       column: id {}

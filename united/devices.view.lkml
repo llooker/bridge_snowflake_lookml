@@ -1,5 +1,5 @@
 include: "../drync/drync_united/devices.view.lkml"
-include: "../tipsi/tipsi_bridge/devices.view.lkml"
+include: "../tipsi/tipsi_united/devices.view.lkml"
 
 
 
@@ -9,7 +9,7 @@ view: devices_united {
   derived_table: {
     sql:   SELECT * FROM ${devices_drync_united.SQL_TABLE_NAME}
             UNION
-            SELECT * FROM ${devices_tipsi_bridge.SQL_TABLE_NAME}
+            SELECT * FROM ${devices_tipsi_united.SQL_TABLE_NAME}
       ;;
   }
 
