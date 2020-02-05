@@ -1,4 +1,4 @@
-include: "../drync/drync_bridge/order_product.view.lkml"
+include: "../drync/drync_united/order_product.view.lkml"
 include: "../tipsi/tipsi_bridge/order_product.view.lkml"
 
 
@@ -11,7 +11,7 @@ view: order_product_united {
   view_label: "Order Items"
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql:   SELECT * FROM ${order_product_drync_bridge.SQL_TABLE_NAME}
+    sql:   SELECT * FROM ${order_product_drync_united.SQL_TABLE_NAME}
             UNION
             SELECT * FROM ${order_product_tipsi_bridge.SQL_TABLE_NAME}
       ;;

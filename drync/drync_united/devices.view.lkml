@@ -1,4 +1,4 @@
-view: devices_drync_bridge {
+view: devices_drync_united {
   derived_table: {
     explore_source: devices_drync {
       column: id {}

@@ -1,6 +1,6 @@
 include: "../../united/users.view"
 
-view: users_drync_bridge {
+view: users_drync_united {
   extends: [users_fields]
   derived_table: {
     explore_source: users_drync {

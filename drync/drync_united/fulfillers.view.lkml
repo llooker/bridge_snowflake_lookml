@@ -1,4 +1,4 @@
-view: fulfillers_drync_bridge {
+view: fulfillers_drync_united {
   derived_table: {
     explore_source: fulfillers_drync {
       column: fulfiller_id {field: fulfillers.id}

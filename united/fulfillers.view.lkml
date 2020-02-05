@@ -1,4 +1,4 @@
-include: "../drync/drync_bridge/fulfillers.view.lkml"
+include: "../drync/drync_united/fulfillers.view.lkml"
 include: "../tipsi/tipsi_bridge/fulfillers.view.lkml"
 
 
@@ -7,7 +7,7 @@ include: "../tipsi/tipsi_bridge/fulfillers.view.lkml"
 view: fulfillers_united {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql:   SELECT * FROM ${fulfillers_drync_bridge.SQL_TABLE_NAME}
+    sql:   SELECT * FROM ${fulfillers_drync_united.SQL_TABLE_NAME}
             UNION
             SELECT * FROM ${fulfillers_tipsi_bridge.SQL_TABLE_NAME}
       ;;

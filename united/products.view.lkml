@@ -1,4 +1,4 @@
-include: "../drync/drync_bridge/products.view.lkml"
+include: "../drync/drync_united/products.view.lkml"
 include: "../tipsi/tipsi_bridge/products.view.lkml"
 
 
@@ -7,7 +7,7 @@ include: "../tipsi/tipsi_bridge/products.view.lkml"
 view: products_united {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql:   SELECT * FROM ${products_drync_bridge.SQL_TABLE_NAME}
+    sql:   SELECT * FROM ${products_drync_united.SQL_TABLE_NAME}
             UNION
             SELECT * FROM ${products_tipsi_bridge.SQL_TABLE_NAME}
       ;;

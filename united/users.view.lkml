@@ -1,4 +1,4 @@
-include: "../drync/drync_bridge/users.view.lkml"
+include: "../drync/drync_united/users.view.lkml"
 include: "../tipsi/tipsi_bridge/users.view.lkml"
 
 
@@ -7,7 +7,7 @@ include: "../tipsi/tipsi_bridge/users.view.lkml"
 view: users {
   extends: [users_fields]
   derived_table: {
-    sql:  SELECT * FROM ${users_drync_bridge.SQL_TABLE_NAME}
+    sql:  SELECT * FROM ${users_drync_united.SQL_TABLE_NAME}
             UNION
           SELECT * FROM ${users_tipsi_bridge.SQL_TABLE_NAME}
       ;;

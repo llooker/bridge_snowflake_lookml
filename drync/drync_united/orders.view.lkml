@@ -1,4 +1,4 @@
-view: orders_drync_bridge {
+view: orders_drync_united {
   derived_table: {
     explore_source: orders_drync {
       column: id {}
