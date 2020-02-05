@@ -1,5 +1,6 @@
 include: "../drync/drync_united/devices.view.lkml"
 include: "../tipsi/tipsi_united/devices.view.lkml"
+include: "../bridge/bridge_united/devices.view.lkml"
 
 
 
@@ -10,6 +11,8 @@ view: devices_united {
     sql:   SELECT * FROM ${devices_drync_united.SQL_TABLE_NAME}
             UNION
             SELECT * FROM ${devices_tipsi_united.SQL_TABLE_NAME}
+            UNION
+            SELECT * FROM ${devices_bridge_united.SQL_TABLE_NAME}
       ;;
   }
 

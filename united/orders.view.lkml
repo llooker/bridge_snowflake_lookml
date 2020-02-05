@@ -1,6 +1,6 @@
 include: "../drync/drync_united/orders.view.lkml"
 include: "../tipsi/tipsi_united/orders.view.lkml"
-
+include: "../bridge/bridge_united/orders.view.lkml"
 
 
 
@@ -10,6 +10,8 @@ view: orders_united {
     sql:  SELECT * FROM ${orders_drync_united.SQL_TABLE_NAME}
             UNION
           SELECT * FROM ${orders_tipsi_united.SQL_TABLE_NAME}
+          UNION
+          SELECT * FROM ${orders_bridge_united.SQL_TABLE_NAME}
       ;;
   }
 

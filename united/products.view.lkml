@@ -1,6 +1,6 @@
 include: "../drync/drync_united/products.view.lkml"
 include: "../tipsi/tipsi_united/products.view.lkml"
-
+include: "../bridge/bridge_united/products.view.lkml"
 
 
 
@@ -10,6 +10,8 @@ view: products_united {
     sql:   SELECT * FROM ${products_drync_united.SQL_TABLE_NAME}
             UNION
             SELECT * FROM ${products_tipsi_united.SQL_TABLE_NAME}
+            UNION
+            SELECT * FROM ${products_bridge_united.SQL_TABLE_NAME}
       ;;
   }
 

@@ -12,10 +12,10 @@
         column: quantity {}
         column: discount_per_bottle {}
         derived_column: fulfillment_method {
-          sql: '' ;;
+          sql: null ;;
         }
         derived_column: source {
-          sql: 'tipsi' ;;
+          sql: 'bridge' ;;
         }
         derived_column: order_list_price {
           sql: sum(price_per_bottle*quantity) over (partition by order_id) ;;
