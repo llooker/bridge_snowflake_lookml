@@ -7,7 +7,10 @@ view: fulfillers_tipsi_united {
         sql: 0 ;;
       }
       derived_column: organization_name {
-        sql: '' ;;
+        sql: null ;;
+      }
+      derived_column: organization_short_name {
+        sql: null ;;
       }
       derived_column: source {
         sql: 'tipsi' ;;

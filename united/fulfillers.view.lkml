@@ -22,6 +22,7 @@ view: fulfillers_united {
   dimension: fulfiller_name {}
   dimension: organization_id {}
   dimension: organization_name {}
+  dimension: organization_short_name {}
   dimension: source {
     type: string
   }

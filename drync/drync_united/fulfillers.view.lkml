@@ -5,6 +5,7 @@ view: fulfillers_drync_united {
       column: fulfiller_name {field: fulfillers.name}
       column: organization_id {field: fulfillers.organization_id}
       column: organization_name {field:organizations.name}
+      column: organization_short_name {field:organizations.short_name}
       derived_column: source {
         sql: 'drync' ;;
       }
