@@ -97,6 +97,7 @@ view: order_product_united {
     type: sum
     sql: ${line_item_subtotal} ;;
     value_format_name: usd
+    drill_fields: [detail*]
   }
   dimension: line_item_tax {
     hidden: yes
@@ -107,6 +108,8 @@ view: order_product_united {
     type: sum
     sql:  ${line_item_tax} ;;
     value_format_name: usd
+
+    drill_fields: [detail*]
   }
   dimension: line_item_deposit {
     hidden: yes
@@ -117,6 +120,7 @@ view: order_product_united {
     type: sum
     sql: ${line_item_deposit} ;;
     value_format_name: usd
+    drill_fields: [detail*]
   }
   dimension: line_item_discount {
     hidden: yes
@@ -127,6 +131,7 @@ view: order_product_united {
     type: sum
     sql: ${line_item_discount} ;;
     value_format_name: usd
+    drill_fields: [detail*]
   }
   dimension: line_item_net {
     type: number
@@ -137,6 +142,7 @@ view: order_product_united {
     type: sum
     sql: ${line_item_net} ;;
     value_format_name: usd
+    drill_fields: [detail*]
   }
   dimension: fulfillment_method {
     sql: case when ${TABLE}.fulfillment_method = 'delivery' then 'Delivery'
@@ -150,6 +156,7 @@ view: order_product_united {
     value_format_name: usd
     type: sum
     sql: ${line_item_actual_price} ;;
+    drill_fields: [detail*]
   }
 
   measure: count {
@@ -176,6 +183,7 @@ view: order_product_united {
     type: number
     sql: ${total_price} / nullif(${order_count},0) ;;
     value_format_name: usd
+    drill_fields: [detail*]
   }
 
   measure: average_basket_size {
@@ -183,6 +191,7 @@ view: order_product_united {
     type: number
     sql: AVG(${quantity}) ;;
     value_format_name: decimal_0
+    drill_fields: [detail*]
   }
 
 dimension: order_total_discount {
@@ -192,16 +201,11 @@ dimension: order_total_discount {
   sql: ${quantity} * ${discount_per_bottle} ;;
 }
 
-  measure: total_discount_2 {
-    type: sum
-    sql: ${order_total_discount}*${percent_of_order} ;;
-    value_format_name: usd
-  }
-
   measure: spend_per_user  {
     type: number
     sql: (${total_price})/nullif(${orders_united.distinct_buyers},0);;
     value_format_name: usd
+    drill_fields: [detail*]
   }
 
   set: detail {
