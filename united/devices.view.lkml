@@ -16,14 +16,10 @@ view: devices_united {
       ;;
   }
 
-  dimension: id {
-    type: number
-  }
-
   dimension: source_id {
     type: string
     primary_key: yes
-    sql: ${source} || ${id} ;;
+    sql: ${source} || ${device_id} ;;
   }
   dimension: device_id {}
   dimension: user_id {}

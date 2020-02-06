@@ -55,6 +55,7 @@ view: notifications_fcmdevice_bridge {
   }
 
   dimension: device_id {
+    primary_key: yes
     type: string
     sql: ${TABLE}."DEVICE_ID" ;;
   }

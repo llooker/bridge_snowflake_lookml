@@ -275,7 +275,7 @@ explore: retail_retailgroup_bridge {
 #   group_label: "Tipsi"
 # }
 #
-# explore: devices_tipsi {
-#   from: notifications_fcmdevice
-#   group_label: "Tipsi"
-# }
+explore: devices_bridge {
+  from: notifications_fcmdevice_bridge
+  group_label: "Bridge"
+}

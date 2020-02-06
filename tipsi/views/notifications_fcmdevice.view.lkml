@@ -2,6 +2,7 @@ view: notifications_fcmdevice {
   sql_table_name: TIPSI.PUBLIC.NOTIFICATIONS_FCMDEVICE ;;
 
   dimension: device_id {
+    primary_key: yes #https://dryncapp.looker.com/sql/4jzzr2vhxtqnzs
     type: string
     sql: ${TABLE}."DEVICE_ID" ;;
   }
