@@ -11,6 +11,7 @@ view: order_product_united {
   view_label: "Order Items"
   # Or, you could make this view a derived table, like this:
   derived_table: {
+#     datagroup_trigger: bridge_default
     sql:   SELECT * FROM ${order_product_drync_united.SQL_TABLE_NAME}
             UNION
             SELECT * FROM ${order_product_tipsi_united.SQL_TABLE_NAME}

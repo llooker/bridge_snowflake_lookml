@@ -7,6 +7,7 @@ include: "../tipsi/tipsi_united/fulfillers.view.lkml"
 view: fulfillers_united {
   # Or, you could make this view a derived table, like this:
   derived_table: {
+#     datagroup_trigger: bridge_default
     sql:   SELECT * FROM ${fulfillers_drync_united.SQL_TABLE_NAME}
             UNION
             SELECT * FROM ${fulfillers_tipsi_united.SQL_TABLE_NAME}

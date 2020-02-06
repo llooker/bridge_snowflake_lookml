@@ -15,7 +15,7 @@
           sql: '' ;;
         }
         derived_column: source {
-          sql: 'tipsi' ;;
+          sql: 'bridge' ;;
         }
         derived_column: order_list_price {
           sql: sum(price_per_bottle*quantity) over (partition by order_id) ;;
