@@ -51,6 +51,10 @@ explore: products_united {
 # }
 
 explore: order_product_united {
+  access_filter: {
+    field: fulfillers_united.organization_short_name
+    user_attribute: organization
+  }
   group_label: "⭐ United"
   label: " 💰Order Items"
   sql_always_where: (${orders_united.status} NOT IN  ('cancelled','declined') OR ${orders_united.id} IS NULL)  ;;
