@@ -174,6 +174,15 @@ view: order_order_bridge {
     sql: ${TABLE}."TOTAL_PRICE" ;;
   }
 
+  dimension: actual_order_price {
+    type: number
+    sql: ${products_price} - ${products_discount}
+          + ${delivery_price}
+          + ${delivery_tax}
+          + ${products_tax}
+          ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [

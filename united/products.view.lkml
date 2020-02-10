@@ -7,6 +7,7 @@ include: "../bridge/bridge_united/products.view.lkml"
 view: products_united {
   # Or, you could make this view a derived table, like this:
   derived_table: {
+    datagroup_trigger: bridge_default
     sql:   SELECT * FROM ${products_drync_united.SQL_TABLE_NAME}
             UNION
             SELECT * FROM ${products_tipsi_united.SQL_TABLE_NAME}

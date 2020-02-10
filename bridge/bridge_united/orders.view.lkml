@@ -1,15 +1,15 @@
 
   view: orders_bridge_united {
     derived_table: {
-      explore_source: orders_bridge {
+      explore_source: order_order_bridge {
         column: id {}
-        column: created_time { field: orders_bridge.created_time }
-        column: quantity { field: orders_bridge.total_count }
+        column: created_time { field: order_order_bridge.created_time }
+        column: quantity { field: order_order_bridge.total_count }
         column: store_id {}
         column: user_id {}
-        column: discount { field: orders_bridge.products_discount }
+        column: discount { field: order_order_bridge.products_discount }
         column: total_price {}
-        column: status {field: orders_bridge.order_status}
+        column: status {field: order_order_bridge.order_status}
         column: actual_order_price {}
         derived_column: payment_method {
           sql: null ;;

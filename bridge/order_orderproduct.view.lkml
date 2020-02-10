@@ -66,7 +66,8 @@ view: order_orderproduct_bridge {
     sql: ${TABLE}."BARCODES" ;;
   }
 
-  dimension: count {
+  # Change name to not conflict with 'count' measure
+  dimension: quantity {
     type: number
     sql: ${TABLE}."COUNT" ;;
   }
@@ -93,6 +94,11 @@ view: order_orderproduct_bridge {
   dimension: discount_percent {
     type: number
     sql: ${TABLE}."DISCOUNT_PERCENT" ;;
+  }
+
+  dimension: discount_per_bottle {
+    type: number
+    sql: ${discount_percent} * ${price_per_bottle} ;;
   }
 
   dimension: discount_short_text {
@@ -130,6 +136,11 @@ view: order_orderproduct_bridge {
     sql: ${TABLE}."ORDER_ID" ;;
   }
 
+  dimension: price_per_bottle {
+    type: number
+    sql: ${total_price} /nullif(${quantity}, 0) ;;
+  }
+
   dimension: total_price {
     type: number
     sql: ${TABLE}."TOTAL_PRICE" ;;
@@ -152,6 +163,14 @@ view: order_orderproduct_bridge {
   dimension: wine_id {
     type: number
     sql: ${TABLE}."WINE_ID" ;;
+  }
+
+  dimension: bottle_id {
+    type: string
+    sql: CASE
+          WHEN ${wine_id} is null THEN ${drink_id}
+          WHEN ${drink_id} is null THEN ${wine_id}
+          ELSE NULL END;;
   }
 
 }

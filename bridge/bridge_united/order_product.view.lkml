@@ -4,7 +4,7 @@
 # include: "tipsi.explore.view.lkml"
 
     derived_table: {
-      explore_source: order_products_bridge {
+      explore_source: order_orderproduct_bridge {
         column: id {}
         column: order_id {}
         column: bottle_id {}

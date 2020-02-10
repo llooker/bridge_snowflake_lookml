@@ -75,6 +75,16 @@ view: tipsi_auth_user_bridge {
     sql: ${TABLE}."BIRTH_DATE" ;;
   }
 
+  dimension: birth_year_number {
+    type: number
+    sql: ${birth_year::number} ;;
+  }
+
+  dimension: age {
+    type: number
+    sql: extract(year from current_date) - ${birth_year} ;;
+  }
+
   dimension: data {
     type: string
     sql: ${TABLE}."DATA" ;;
@@ -97,6 +107,11 @@ view: tipsi_auth_user_bridge {
   dimension: email {
     type: string
     sql: ${TABLE}."EMAIL" ;;
+  }
+
+  dimension: gender {
+    type: string
+    sql: null ;;
   }
 
   dimension: first_name {

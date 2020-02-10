@@ -7,6 +7,7 @@ include: "../bridge/bridge_united/users.view.lkml"
 view: users {
   extends: [users_fields]
   derived_table: {
+    datagroup_trigger: bridge_default
     sql:  SELECT * FROM ${users_drync_united.SQL_TABLE_NAME}
             UNION
           SELECT * FROM ${users_tipsi_united.SQL_TABLE_NAME}
