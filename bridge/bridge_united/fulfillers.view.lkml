@@ -6,7 +6,7 @@
       column: fulfiller_name {field:core_restaurant_bridge.name}
       column: organization_id {field:retail_retailgroup_bridge.id}
       column: organization_name {field:retail_retailgroup_bridge.name}
-#       +      column: organization_short_name {field: organizations.short_name}
+      column: organization_short_name {field: retail_retailgroup_bridge.short_name}
       derived_column: source {
         sql: 'bridge' ;;
       }

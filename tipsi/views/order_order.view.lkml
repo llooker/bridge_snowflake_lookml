@@ -62,7 +62,7 @@ view: order_order {
   }
 
   dimension: order_status {
-    type: number
+    type: string
     sql: ${TABLE}."ORDER_STATUS"::varchar;;
   }
 
