@@ -111,8 +111,8 @@ view: order_order_bridge {
   }
 
   dimension: order_status {
-    type: number
-    sql: ${TABLE}."ORDER_STATUS" ;;
+    type: string
+    sql: ${TABLE}."ORDER_STATUS"::varchar ;;
   }
 
   dimension_group: payment {
